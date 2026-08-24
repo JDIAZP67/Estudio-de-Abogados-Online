@@ -26,6 +26,7 @@
         <a href="#cursos">Cursos</a>
         <a href="#staff">Staff</a>
         <a href="#sala">Sala Virtual</a>
+        <a href="#faq">FAQ</a>
         <a href="#contacto">Contacto</a>
         <a class="btn-cta" href="#consultoria">Agendar consulta</a>
       </nav>
@@ -171,6 +172,79 @@
       </div>
     </section>
 
+    <section id="faq">
+      <div class="contenedor">
+        <div class="encabezado-seccion">
+          <span class="etiqueta">Preguntas frecuentes</span>
+          <h2>Resolvemos tus dudas</h2>
+          <p>Lo que más nos preguntan antes de agendar una consulta o inscribirse a un curso.</p>
+        </div>
+
+        <div class="faq">
+          <details>
+            <summary>¿La asesoría por videollamada es tan válida como una presencial?</summary>
+            <p class="faq-respuesta">Sí. Recibes orientación profesional de abogados colegiados, con su número de colegiatura visible en la sección Staff, con la misma seriedad que una consulta presencial pero sin desplazarte. La sesión es privada y la información que compartes está protegida por el secreto profesional.</p>
+          </details>
+
+          <details>
+            <summary>¿Cómo pago mi consulta o mi curso?</summary>
+            <p class="faq-respuesta">Al confirmar tu cita o inscripción coordinamos el pago por WhatsApp o correo. Aceptamos Yape, Plin y transferencia bancaria. Siempre recibirás tu comprobante antes de la sesión o del acceso al curso. Consulta el paso a paso en la sección <a href="#pagos">Cómo pagar</a>.</p>
+          </details>
+
+          <details>
+            <summary>¿El certificado de los cursos tiene validez?</summary>
+            <p class="faq-respuesta">Todos los programas de la Academia Legal incluyen certificado digital con tu nombre, las horas y el contenido desarrollado; los diplomados en vivo incluyen certificación con valor curricular.</p>
+          </details>
+
+          <details>
+            <summary>¿Puedo reprogramar o cancelar mi cita?</summary>
+            <p class="faq-respuesta">Sí. Avísanos por WhatsApp al menos 24 horas antes y reprogramamos sin costo. Los cambios fuera de ese plazo se evalúan caso por caso según la disponibilidad del abogado.</p>
+          </details>
+
+          <details>
+            <summary>¿Qué hago si tengo problemas para conectarme a mi videollamada?</summary>
+            <p class="faq-respuesta">Usa la sección Sala Virtual de esta misma página: pega tu enlace de Google Meet en la pestaña "Consulta jurídica" o "Aula virtual" y entra directo desde ahí. Si el problema continúa, escríbenos por WhatsApp y te reenviamos el enlace.</p>
+          </details>
+
+          <details>
+            <summary>¿Atienden empresas? ¿Hay precios especiales por volumen?</summary>
+            <p class="faq-respuesta">Sí. Además de las especialidades de Derecho Financiero (S/ 90) y Derecho Corporativo (S/ 120), ofrecemos tarifas corporativas para equipos: formación laboral para RR.HH., paquetes mensuales de consultas y convenios a medida. Escríbenos por WhatsApp contándonos tu necesidad y te enviamos una propuesta.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="pagos" class="seccion-gris">
+      <div class="contenedor">
+        <div class="encabezado-seccion">
+          <span class="etiqueta">Medios de pago</span>
+          <h2>Cómo pagar tu consulta o curso</h2>
+          <p>Simple y seguro: coordinamos todo por WhatsApp y recibes tu comprobante antes de conectarte.</p>
+        </div>
+
+        <div class="pasos">
+          <article class="paso"><div class="num">1</div><h4>Agenda o inscríbete</h4><p>Reserva tu consulta jurídica o tu curso desde esta misma web.</p></article>
+          <article class="paso"><div class="num">2</div><h4>Recibe el dato</h4><p>Por WhatsApp te enviamos el número de Yape o Plin, o la cuenta bancaria del estudio.</p></article>
+          <article class="paso"><div class="num">3</div><h4>Paga y envía captura</h4><p>Realiza el pago y mándanos la captura por el mismo chat.</p></article>
+          <article class="paso"><div class="num">4</div><h4>Recibe confirmación</h4><p>Te enviamos tu comprobante y el link de Google Meet para la cita o clase.</p></article>
+        </div>
+
+        <div class="pagos-badges">
+          <span class="medio-pago medio-yape">🟣 Yape</span>
+          <span class="medio-pago medio-plin">🔵 Plin</span>
+          <span class="medio-pago medio-transferencia">🏦 Transferencia bancaria</span>
+          <span class="medio-pago medio-online" id="badge-online">💳 Pago online directo · próximamente</span>
+        </div>
+
+        <div class="pagos-cta">
+          <button class="btn btn-verde" onclick="pedirDatosPago()">💬 Pedir datos de pago por WhatsApp</button>
+          <p class="nota-seguridad">🔒 Por tu seguridad no publicamos números ni códigos QR: se comparten únicamente por WhatsApp cuando tu cita o inscripción está confirmada.</p>
+        </div>
+
+        <div id="enlaces-pagos" class="grid-enlaces-pagos"></div>
+      </div>
+    </section>
+
     <section id="contacto">
       <div class="contenedor">
         <div class="encabezado-seccion">
@@ -199,6 +273,13 @@
               <div>
                 <h4>Videollamada</h4>
                 <p>Todas las citas y clases en vivo se realizan por Google Meet.</p>
+              </div>
+            </div>
+            <div class="dato">
+              <span class="icono">💳</span>
+              <div>
+                <h4>Medios de pago</h4>
+                <p>Yape, Plin y transferencia bancaria. Pagas al confirmar tu cita o inscripción; el comprobante llega por WhatsApp o correo.<br><a class="enlace-interno" href="#pagos">Ver cómo pagar →</a></p>
               </div>
             </div>
           </div>
@@ -244,6 +325,8 @@
           <li><a href="#contacto">Contacto</a></li>
           <li><a href="#" onclick="event.preventDefault(); document.getElementById('modal-aviso-legal').classList.add('abierto'); document.body.style.overflow='hidden';">Términos y Condiciones</a></li>
           <li><a href="#" onclick="event.preventDefault(); document.getElementById('modal-privacidad').classList.add('abierto'); document.body.style.overflow='hidden';">Política de Privacidad</a></li>
+          <li><a href="docs/documento-procesos.html" target="_blank" rel="noopener">Documento de Procesos (DP-01)</a></li>
+          <li><a href="docs/documento-canvas.html" target="_blank" rel="noopener">Modelo de Negocio Canvas (DC-01)</a></li>
         </ul>
       </div>
     </div>
@@ -256,66 +339,6 @@
     <span class="burbuja">¿Necesitas ayuda?</span>
     <span class="icono">💬</span>
   </a>
-
-  <div class="modal" id="modal-consulta">
-    <div class="modal-contenido">
-      <div class="modal-cabecera">
-        <div>
-          <h3>Agendar consulta</h3>
-          <p><span class="txt-especialidad"></span> · <span class="txt-precio"></span></p>
-        </div>
-        <button class="cerrar" data-modal="consulta" aria-label="Cerrar">×</button>
-      </div>
-      <div class="campo">
-        <label for="consulta-abogado">Abogado</label>
-        <select class="select-abogado" id="consulta-abogado"></select>
-      </div>
-      <div class="campo">
-        <label for="consulta-fecha">Fecha</label>
-        <input type="date" class="input-fecha" id="consulta-fecha">
-      </div>
-      <div class="campo">
-        <label for="consulta-hora">Hora</label>
-        <input type="time" class="input-hora" id="consulta-hora">
-      </div>
-      <div class="campo">
-        <label for="consulta-nombre">Tu nombre</label>
-        <input type="text" class="input-nombre" id="consulta-nombre" placeholder="Nombre y apellido">
-      </div>
-      <div class="campo">
-        <label for="consulta-whatsapp">Tu WhatsApp (opcional)</label>
-        <input type="tel" class="input-whatsapp" id="consulta-whatsapp" placeholder="+51 999 999 999">
-      </div>
-      <button class="btn btn-verde" onclick="enviarConsulta()">Confirmar por WhatsApp</button>
-      <p class="aviso-legal">Al confirmar aceptas nuestros Términos y Condiciones. La confirmación de pago se coordina por WhatsApp.</p>
-    </div>
-  </div>
-
-  <div class="modal" id="modal-curso">
-    <div class="modal-contenido">
-      <div class="modal-cabecera">
-        <div>
-          <h3>Inscribirme al curso</h3>
-          <p><span class="txt-curso"></span> · <span class="txt-precio"></span></p>
-        </div>
-        <button class="cerrar" data-modal="curso" aria-label="Cerrar">×</button>
-      </div>
-      <div class="campo">
-        <label for="curso-nombre">Tu nombre</label>
-        <input type="text" class="input-nombre" id="curso-nombre" placeholder="Nombre y apellido">
-      </div>
-      <div class="campo">
-        <label for="curso-correo">Tu correo</label>
-        <input type="email" class="input-correo" id="curso-correo" placeholder="tucorreo@ejemplo.com">
-      </div>
-      <div class="campo">
-        <label for="curso-whatsapp">Tu WhatsApp</label>
-        <input type="tel" class="input-whatsapp" id="curso-whatsapp" placeholder="+51 999 999 999">
-      </div>
-      <button class="btn btn-verde" onclick="enviarCurso()">Inscribirme por WhatsApp</button>
-      <p class="aviso-legal">Recibirás el comprobante y el acceso al curso por tu correo o WhatsApp.</p>
-    </div>
-  </div>
 
   <div class="modal" id="modal-aviso-legal">
     <div class="modal-contenido">
