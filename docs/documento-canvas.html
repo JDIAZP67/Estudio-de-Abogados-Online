@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LexOnline — Modelo de Negocio Canvas</title>
+  <meta name="description" content="Modelo de Negocio Canvas de LexOnline: los 9 bloques de Osterwalder aplicados a la consultoría jurídica online y la academia legal.">
+  <link rel="stylesheet" href="estilos-docs.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='24' fill='%230B2A5B'/%3E%3Ctext x='24' y='32' font-size='22' text-anchor='middle' fill='%23C9A227' font-family='Georgia'%3E%E2%9A%96%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="doc">
+
+  <!-- ================= PORTADA ================= -->
+  <header class="portada">
+    <span class="sello">LexOnline · Estudio Jurídico Virtual</span>
+    <h1>Modelo de Negocio Canvas</h1>
+    <p>Consultoría Jurídica y Academia Legal 100% online</p>
+
+    <table class="meta-doc">
+      <tr><td>Proyecto</td><td>Web dinámica de estudio jurídico virtual (LexOnline)</td></tr>
+      <tr><td>Documento</td><td>DC-01 · Modelo de Negocio Canvas</td></tr>
+      <tr><td>Versión</td><td>1.0</td></tr>
+      <tr><td>Fecha</td><td>23 de agosto de 2026</td></tr>
+      <tr><td>Elaborado por</td><td>Equipo LexOnline — Área de Desarrollo</td></tr>
+      <tr><td>Estado</td><td>Aprobado para revisión académica</td></tr>
+      <tr><td>Referencia metodológica</td><td>Business Model Canvas — A. Osterwalder e Y. Pigneur (<a href="https://www.ceupe.do/blog/como-hacer-un-modelo-de-negocios-canvas.html" target="_blank" rel="noopener" style="color:#C9A227;">artículo CEUPE propuesto por el cliente</a>)</td></tr>
+      <tr><td>Documentos relacionados</td><td>DP-01 · Documento de Procesos (<a href="documento-procesos.html" style="color:#C9A227;">ver aquí</a>)</td></tr>
+    </table>
+  </header>
+
+  <main class="contenido">
+
+    <!-- ================= 1. OBJETIVO ================= -->
+    <h2 id="objetivo">1. Objetivo del documento</h2>
+    <p>Describir el modelo de negocio de <strong>LexOnline</strong> utilizando el lienzo <em>Business Model Canvas</em> de Alexander Osterwalder e Yves Pigneur: un diagrama visual de <strong>9 bloques</strong> que resume cómo la plataforma crea, entrega y captura valor mediante sus dos líneas de servicio — <strong>consultoría jurídica por videollamada</strong> y <strong>cursos de formación legal</strong>.</p>
+    <p>Este documento complementa al <a href="documento-procesos.html">DP-01 · Documento de Procesos</a>: mientras el DP-01 explica <em>cómo opera</em> la plataforma (procesos P01–P07), este DC-01 explica <em>qué sostiene al negocio</em> y <em>cómo genera ingresos</em>.</p>
+
+    <!-- ================= 2. ALCANCE ================= -->
+    <h2 id="alcance">2. Alcance</h2>
+    <ul>
+      <li><strong>Incluye:</strong> el análisis completo de los 9 bloques del modelo aplicado a LexOnline, con datos reales del catálogo publicado (<code class="inline">js/datos.js</code>) y su vinculación con los procesos documentados en DP-01.</li>
+      <li><strong>No incluye:</strong> proyecciones financieras detalladas, estudio de mercado formal ni procesos judiciales ante órganos jurisdiccionales.</li>
+    </ul>
+
+    <!-- ================= 3. FUNDAMENTO ================= -->
+    <h2 id="fundamento">3. Fundamento: ¿por qué aplicar el Canvas a LexOnline?</h2>
+    <p>El Business Model Canvas es una herramienta de gestión estratégica que describe el "esqueleto" de una empresa en una sola lámina, facilitando la comprensión, discusión y análisis del negocio. Es válida tanto para empresas nuevas como establecidas, y aplica igualmente a servicios profesionales como la consultoría legal.</p>
+    <p>El modelo clásico identifica entre sus actividades clave la <strong>"resolución de problemas (consultoría)"</strong>, que es precisamente la primera línea de negocio de LexOnline; la segunda línea (Academia Legal) corresponde al tipo <strong>"formación"</strong>. Esto hace que el lienzo encaje de forma natural con el proyecto.</p>
+    <div class="nota"><strong>Regla de actualización:</strong> cualquier cambio de especialidades, precios, cursos o staff registrado en <code class="inline">js/datos.js</code> debe reflejarse en este documento para mantener la coherencia catálogo ↔ modelo de negocio.</div>
+
+    <!-- ================= 4. LIENZO VISUAL ================= -->
+    <h2 id="lienzo">4. Lienzo Canvas de LexOnline</h2>
+    <p>Vista general de los 9 bloques. El bloque central (<strong>B02 · Propuesta de valor</strong>) es el núcleo del modelo; los bloques derechos describen el frente del cliente y los izquierdos, la infraestructura.</p>
+
+    <div class="lienzo-canvas">
+
+      <!-- B02 Propuesta de valor (centro) -->
+      <div class="canvas-bloque cb-propuesta">
+        <div class="cb-cabecera"><span class="cb-num">2</span><h4>Propuesta de valor</h4></div>
+        <div class="cb-cuerpo">
+          <ul>
+            <li>Asesoría legal 100% online, sin desplazamientos ni trámites presenciales</li>
+            <li>Abogados colegiados con número CAL visible y verificable</li>
+            <li>Un solo lugar: catálogo + agenda + pago + sala Google Meet</li>
+            <li>Cursos dictados por el mismo staff consultor, con certificado digital</li>
+            <li>Precios transparentes por especialidad y programa</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- B01 Segmentos -->
+      <div class="canvas-bloque cb-segmentos">
+        <div class="cb-cabecera"><span class="cb-num">1</span><h4>Segmentos de clientes</h4></div>
+        <div class="cb-cuerpo">
+          <ul>
+            <li>Personas con necesidad legal puntual (penal, laboral, familia, propiedades)</li>
+            <li>PYMEs y empresas (financiero, corporativo)</li>
+            <li>Profesionales y estudiantes que buscan formación legal certificada</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- B03 Canales -->
+      <div class="canvas-bloque cb-canales">
+        <div class="cb-cabecera"><span class="cb-num">3</span><h4>Canales</h4></div>
+        <div class="cb-cuerpo">
+          <ul>
+            <li>Web propia con catálogo dinámico</li>
+            <li>WhatsApp (mensajes prellenados)</li>
+            <li>Google Meet · Cal.com · correo</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- B04 Relación -->
+      <div class="canvas-bloque cb-relacion">
+        <div class="cb-cabecera"><span class="cb-num">4</span><h4>Relación con clientes</h4></div>
+        <div class="cb-cuerpo">
+          <ul>
+            <li>Atención personalizada 1:1 por WhatsApp</li>
+            <li>Testimonios publicados (prueba social)</li>
+            <li>Botón flotante "¿Necesitas ayuda?"</li>
+            <li>Derivación a patrocinio formal</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- B05 Ingresos -->
+      <div class="canvas-bloque cb-ingresos">
+        <div class="cb-cabecera"><span class="cb-num">5</span><h4>Flujos de ingresos</h4></div>
+        <div class="cb-cuerpo">
+          <ul>
+            <li>Tarifa por uso: consultas S/ 80 – S/ 120 por sesión</li>
+            <li>Venta de programas formativos: S/ 199 – S/ 450</li>
+            <li>Futuro: precios corporativos, suscripción a biblioteca grabada</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- B06 Recursos -->
+      <div class="canvas-bloque cb-recursos">
+        <div class="cb-cabecera"><span class="cb-num">6</span><h4>Recursos clave</h4></div>
+        <div class="cb-cuerpo">
+          <ul>
+            <li>Staff de 8 abogados colegiados en 6 especialidades</li>
+            <li>Plataforma web dinámica (datos.js)</li>
+            <li>Marca LexOnline y material didáctico propio</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- B07 Actividades -->
+      <div class="canvas-bloque cb-actividades">
+        <div class="cb-cabecera"><span class="cb-num">7</span><h4>Actividades clave</h4></div>
+        <div class="cb-cuerpo">
+          <ul>
+            <li>Atender consultas por videollamada (30–45 min)</li>
+            <li>Producir y dictar cursos</li>
+            <li>Gestionar catálogo, citas y pagos</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- B08 Socios -->
+      <div class="canvas-bloque cb-socios">
+        <div class="cb-cabecera"><span class="cb-num">8</span><h4>Socios clave</h4></div>
+        <div class="cb-cuerpo">
+          <ul>
+            <li>Google (Meet / Workspace): entrega del servicio y agenda</li>
+            <li>Meta / WhatsApp Business: confirmación y coordinación de pagos</li>
+            <li>Cal.com: motor de reservas embebido</li>
+            <li>Colegio de Abogados: respaldo de colegiatura</li>
+            <li>Bancos y billeteras (Yape / Plin / transferencia): liquidación de cobros</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- B09 Costos -->
+      <div class="canvas-bloque cb-costos">
+        <div class="cb-cabecera"><span class="cb-num">9</span><h4>Estructura de costos</h4></div>
+        <div class="cb-cuerpo">
+          <ul>
+            <li>Honorarios/tiempo del staff por consulta y clase (costo variable principal)</li>
+            <li>Hosting, dominio y herramientas digitales (modelo ligero, sin oficina presencial)</li>
+            <li>Producción de contenido didáctico y marketing digital</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================= 5. FICHAS DETALLADAS ================= -->
+    <h2 id="fichas">5. Fichas detalladas de los 9 bloques</h2>
+    <p>Cada ficha define el bloque según el modelo de Osterwalder y lo llena con información real del proyecto.</p>
+
+    <!-- B01 -->
+    <section class="ficha" id="b01">
+      <div class="ficha-cabecera">
+        <h3>B01 · Segmentos de consumidores</h3>
+        <span class="codigo-proceso">Bloque 1</span>
+      </div>
+      <div class="ficha-cuerpo">
+        <table class="tabla">
+          <tr><td style="width:160px;"><strong>Definición</strong></td><td>Grupos de personas u organizaciones a las que la empresa sirve. De este bloque dependen todos los demás: definir bien el público objetivo garantiza que la estrategia se implemente correctamente.</td></tr>
+        </table>
+        <h4 style="color:var(--azul-claro);font-size:14px;margin:10px 0 6px;">Aplicación en LexOnline — 3 segmentos:</h4>
+        <ol class="pasos-lista">
+          <li><strong>Personas naturales con necesidad legal puntual:</strong> atienden las especialidades de Penal (S/ 80), Laboral (S/ 80), Familia (S/ 80) y Propiedades (S/ 85). Buscan resolver un problema concreto en una sesión corta (30 min).</li>
+          <li><strong>PYMEs y empresas:</strong> requieren Derecho Financiero (deudas, SUNAT, tributación — S/ 90) y Corporativo (constitución de empresas, contratos mercantiles — S/ 120, sesión de 45 min). Potenciales compradores de precios corporativos.</li>
+          <li><strong>Profesionales y estudiantes de derecho:</strong> buscan capacitación certificada; consumen la Academia Legal con programas de S/ 199 (grabado) a S/ 450 (diplomado en vivo).</li>
+        </ol>
+        <p class="nota">Los testimonios de la portada están redactados uno por segmento: empresario (consulta penal), contadora (diplomado) y administradora (contrato de arrendamiento).</p>
+      </div>
+    </section>
+
+    <!-- B02 -->
+    <section class="ficha" id="b02">
+      <div class="ficha-cabecera">
+        <h3>B02 · Propuesta de valor</h3>
+        <span class="codigo-proceso">Bloque 2</span>
+      </div>
+      <div class="ficha-cuerpo">
+        <table class="tabla">
+          <tr><td style="width:160px;"><strong>Definición</strong></td><td>Conjunto de productos y servicios que satisfacen las necesidades del cliente con ventajas claras sobre los competidores directos e indirectos.</td></tr>
+        </table>
+        <h4 style="color:var(--azul-claro);font-size:14px;margin:10px 0 6px;">Aplicación en LexOnline:</h4>
+        <ul>
+          <li><strong>Acceso sin barreras:</strong> asesoría jurídica 100% online — el cliente no viaja, no hace fila ni gestiona trámites presenciales ("del clic a la videollamada").</li>
+          <li><strong>Confianza verificable:</strong> cada abogado muestra su número de colegiatura (CAL) en la sección Staff, algo poco común en despachos tradicionales.</li>
+          <li><strong>Experiencia integrada:</strong> elegir servicio, agendar, pagar y conectarse ocurre en un único lugar (web + WhatsApp + Meet), con respaldo de sala virtual dentro de la propia plataforma.</li>
+          <li><strong>Doble valor con un solo staff:</strong> quien asesora también enseña; los cursos transmiten experiencia práctica real de casos, no solo teoría.</li>
+          <li><strong>Transparencia de precios:</strong> tarifas publicadas por especialidad (S/ 80–120) y programa (S/ 199–450), sin costos ocultos.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- B03 -->
+    <section class="ficha" id="b03">
+      <div class="ficha-cabecera">
+        <h3>B03 · Canales</h3>
+        <span class="codigo-proceso">Bloque 3</span>
+      </div>
+      <div class="ficha-cuerpo">
+        <table class="tabla">
+          <tr><td style="width:160px;"><strong>Definición</strong></td><td>Cómo se comunica la propuesta de valor al cliente, cómo se vende el servicio y cómo se recogen comentarios, de forma rápida, eficiente y rentable.</td></tr>
+        </table>
+        <h4 style="color:var(--azul-claro);font-size:14px;margin:10px 0 6px;">Aplicación en LexOnline:</h4>
+        <table class="tabla">
+          <tr><th>Canal</th><th>Función</th></tr>
+          <tr><td>Web propia (index.html)</td><td>Vitrina y punto de venta: catálogos dinámicos de especialidades y cursos generados desde <code class="inline">js/datos.js</code>.</td></tr>
+          <tr><td>WhatsApp (wa.me)</td><td>Canal transaccional central: solicitudes de cita e inscripción llegan como mensajes prellenados; allí se confirma y coordina el pago.</td></tr>
+          <tr><td>Google Meet</td><td>Entrega del servicio: videollamadas de consulta y clases en vivo.</td></tr>
+          <tr><td>Cal.com (embed)</td><td>Agendamiento con vista de calendario integrado en la web.</td></tr>
+          <tr><td>Correo electrónico</td><td>Envío de comprobantes, accesos y recordatorios de clase.</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- B04 -->
+    <section class="ficha" id="b04">
+      <div class="ficha-cabecera">
+        <h3>B04 · Relación con los clientes</h3>
+        <span class="codigo-proceso">Bloque 4</span>
+      </div>
+      <div class="ficha-cuerpo">
+        <table class="tabla">
+          <tr><td style="width:160px;"><strong>Definición</strong></td><td>Tipo de relación establecida con cada segmento: cómo se adquieren nuevos clientes, cómo se retienen y cómo se incrementan los ingresos por cliente actual.</td></tr>
+        </table>
+        <h4 style="color:var(--azul-claro);font-size:14px;margin:10px 0 6px;">Aplicación en LexOnline:</h4>
+        <ul>
+          <li><strong>Adquisición:</strong> botón flotante de WhatsApp "¿Necesitas ayuda?" visible en toda la web y formulario de contacto que responde dudas antes de la contratación.</li>
+          <li><strong>Retención:</strong> atención personalizada 1:1 durante todo el ciclo (confirmación → pago → acceso → sesión); el mismo abogado puede acompañar el caso después de la consulta.</li>
+          <li><strong>Expansión de ingreso:</strong> el alumno de un curso puede convertirse en cliente de consultoría y viceversa (venta cruzada natural entre ambas líneas).</li>
+          <li><strong>Prueba social:</strong> testimonios publicados que reducen la fricción de compra en servicios legales a distancia.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- B05 -->
+    <section class="ficha" id="b05">
+      <div class="ficha-cabecera">
+        <h3>B05 · Flujos de ingresos</h3>
+        <span class="codigo-proceso">Bloque 5</span>
+      </div>
+      <div class="ficha-cuerpo">
+        <table class="tabla">
+          <tr><td style="width:160px;"><strong>Definición</strong></td><td>Formas en que el negocio genera dinero. El modelo clásico distingue venta de activos, tarifa de uso, suscripción, licencias y comisiones, entre otros.</td></tr>
+        </table>
+        <h4 style="color:var(--azul-claro);font-size:14px;margin:10px 0 6px;">Aplicación en LexOnline:</h4>
+        <table class="tabla">
+          <tr><th>Tipo (modelo clásico)</th><th>Línea LexOnline</th><th>Rango</th></tr>
+          <tr><td><strong>Tarifa de uso</strong></td><td>Consulta jurídica por sesión (30–45 min según especialidad)</td><td>S/ 80 – S/ 120</td></tr>
+          <tr><td><strong>Venta de activos</strong></td><td>Cursos grabados con acceso permanente (Penal Aplicado)</td><td>S/ 199</td></tr>
+          <tr><td><strong>Tarifa de uso + activos</strong></td><td>Programas híbridos y en vivo con certificado (Contratos y Propiedades, Laboral para Empresas, Diplomado Finanzas y Derecho)</td><td>S/ 240 – S/ 450</td></tr>
+        </table>
+        <p class="nota"><strong>Líneas futuras identificadas:</strong> tarifas corporativas por volumen de consultas, suscripción mensual a la biblioteca de cursos grabados y nuevos diplomados por especialidad.</p>
+      </div>
+    </section>
+
+    <!-- B06 -->
+    <section class="ficha" id="b06">
+      <div class="ficha-cabecera">
+        <h3>B06 · Recursos clave</h3>
+        <span class="codigo-proceso">Bloque 6</span>
+      </div>
+      <div class="ficha-cuerpo">
+        <table class="tabla">
+          <tr><td style="width:160px;"><strong>Definición</strong></td><td>Activos más importantes necesarios para crear valor: recursos materiales, intelectuales, humanos y financieros.</td></tr>
+        </table>
+        <h4 style="color:var(--azul-claro);font-size:14px;margin:10px 0 6px;">Aplicación en LexOnline:</h4>
+        <table class="tabla">
+          <tr><th>Tipo</th><th>Recurso</th></tr>
+          <tr><td><strong>Humanos</strong></td><td>Staff de 8 abogados colegiados (CAL 12345 – CAL 89012) distribuidos en 6 especialidades; cumplen doble rol: consultores y docentes.</td></tr>
+          <tr><td><strong>Tecnológicos</strong></td><td>Plataforma web ligera (HTML/CSS/JS con catálogo dinámico), Google Meet, WhatsApp Business, Cal.com, correo institucional.</td></tr>
+          <tr><td><strong>Intelectuales</strong></td><td>Marca LexOnline, material didáctico (videos, PDFs), metodología de atención remota y base de conocimiento de casos.</td></tr>
+          <tr><td><strong>Financieros</strong></td><td>Capital de operación mínimo gracias al modelo sin oficina: los costos principales son variables (honorarios por hora servida).</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- B07 -->
+    <section class="ficha" id="b07">
+      <div class="ficha-cabecera">
+        <h3>B07 · Actividades clave</h3>
+        <span class="codigo-proceso">Bloque 7</span>
+      </div>
+      <div class="ficha-cuerpo">
+        <table class="tabla">
+          <tr><td style="width:160px;"><strong>Definición</strong></td><td>Acciones imprescindibles para implementar el modelo. Los tipos clásicos son producción, resolución de problemas (consultoría) y formación de plataformas/redes.</td></tr>
+        </table>
+        <h4 style="color:var(--azul-claro);font-size:14px;margin:10px 0 6px;">Aplicación en LexOnline:</h4>
+        <ol class="pasos-lista">
+          <li><strong>Prestación del servicio legal (resolución de problemas):</strong> atender consultas de 30–45 min por Meet con calidad profesional constante.</li>
+          <li><strong>Producción formativa:</strong> diseñar, grabar y dictar cursos y diplomados; emitir certificados digitales.</li>
+          <li><strong>Operación del canal digital:</strong> recepcionar solicitudes, confirmar citas e inscripciones, coordinar pagos y entregar accesos.</li>
+          <li><strong>Gestión del catálogo:</strong> actualizar especialidades, precios, cursos y staff editando <code class="inline">js/datos.js</code>; la portada recalcula sus estadísticas automáticamente.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- B08 -->
+    <section class="ficha" id="b08">
+      <div class="ficha-cabecera">
+        <h3>B08 · Socios clave</h3>
+        <span class="codigo-proceso">Bloque 8</span>
+      </div>
+      <div class="ficha-cuerpo">
+        <table class="tabla">
+          <tr><td style="width:160px;"><strong>Definición</strong></td><td>Red de proveedores y aliados sin los cuales el modelo no puede operar; permiten agilizar operaciones y reducir riesgos.</td></tr>
+        </table>
+        <h4 style="color:var(--azul-claro);font-size:14px;margin:10px 0 6px;">Aplicación en LexOnline:</h4>
+        <table class="tabla">
+          <tr><th>Socio</th><th>Aporte al modelo</th></tr>
+          <tr><td>Google (Meet / Workspace)</td><td>Infraestructura de videollamada, calendario y envío de invitaciones.</td></tr>
+          <tr><td>Meta / WhatsApp Business</td><td>Canal oficial de confirmación, soporte y coordinación de pagos.</td></tr>
+          <tr><td>Cal.com</td><td>Motor de reservas embebido en la web con vista mensual.</td></tr>
+          <tr><td>Colegio de Abogados</td><td>Respaldo institucional de la colegiatura: valida la confianza ofrecida al cliente.</td></tr>
+          <tr><td>Bancos y billeteras (transferencia, Yape/Plin)</td><td>Liquidación de cobros de consultas y cursos.</td></tr>
+        </table>
+        <p class="nota"><strong>Alianzas potenciales:</strong> universidades o instituciones certificadoras para dar valor curricular formal a los diplomados.</p>
+      </div>
+    </section>
+
+    <!-- B09 -->
+    <section class="ficha" id="b09">
+      <div class="ficha-cabecera">
+        <h3>B09 · Estructura de costos</h3>
+        <span class="codigo-proceso">Bloque 9</span>
+      </div>
+      <div class="ficha-cuerpo">
+        <table class="tabla">
+          <tr><td style="width:160px;"><strong>Definición</strong></td><td>Costos asociados a operar el modelo. Puede orientarse a reducción de costos o a creación de valor; idealmente se minimiza lo fijo.</td></tr>
+        </table>
+        <h4 style="color:var(--azul-claro);font-size:14px;margin:10px 0 6px;">Aplicación en LexOnline:</h4>
+        <ul>
+          <li><strong>Costos variables (mayoría):</strong> honorarios/tiempo del staff por consulta atendida y clase dictada; comisiones bancarias o de billetera por cada cobro.</li>
+          <li><strong>Costos fijos bajos:</strong> hosting y dominio de la web, planes de herramientas (Cal.com, WhatsApp Business).</li>
+          <li><strong>Inversiones puntuales:</strong> producción de material didáctico (grabación de cursos) y campañas de marketing digital para adquisición de clientes.</li>
+        </ul>
+        <p class="nota"><strong>Ventaja estructural:</strong> al operar sin oficina presencial, la estructura es mayormente variable y escalable — crecer en clientes no exige crecer en costo fijo.</p>
+      </div>
+    </section>
+
+    <!-- ================= 6. CRUCE CON PROCESOS ================= -->
+    <h2 id="cruce">6. Cruce Bloques Canvas ↔ Procesos (DP-01)</h2>
+    <p>Tabla de trazabilidad entre el modelo de negocio y los procesos operativos, de apoyo y estratégicos documentados en el <a href="documento-procesos.html">DP-01</a>:</p>
+
+    <table class="tabla">
+      <tr><th>Bloque Canvas</th><th>Procesos relacionados</th><th>Evidencia en la plataforma</th></tr>
+      <tr><td>B01 Segmentos de consumidores</td><td>P01 · P03</td><td>Catálogos dinámicos por especialidad y curso; testimonios segmentados.</td></tr>
+      <tr><td>B02 Propuesta de valor</td><td>P02 · P05</td><td>Hero con badges de confianza; sección Sala Virtual con respaldo Meet.</td></tr>
+      <tr><td>B03 Canales</td><td>P01 · P03 · P04 · P05</td><td>Mensajes prellenados wa.me, formulario de contacto, embed de Cal.com.</td></tr>
+      <tr><td>B04 Relación con clientes</td><td>P02 · P04</td><td>Confirmación personalizada por WhatsApp; botón flotante de ayuda.</td></tr>
+      <tr><td>B05 Flujos de ingresos</td><td>P02 · P03</td><td>Precios visibles en tarjetas; pago coordinado tras confirmación.</td></tr>
+      <tr><td>B06 Recursos clave</td><td>P06</td><td>Staff y catálogo centralizados en <code class="inline">js/datos.js</code>; estadísticas automáticas.</td></tr>
+      <tr><td>B07 Actividades clave</td><td>P01 · P02 · P03 · P06</td><td>Fichas operativas del DP-01; gestión del catálogo por el socio administrador.</td></tr>
+      <tr><td>B08 Socios clave</td><td>P02 · P03 · P05</td><td>Integraciones activas: Google Meet, WhatsApp, Cal.com.</td></tr>
+      <tr><td>B09 Estructura de costos</td><td>P06 · P07</td><td>Gestión administrativa fuera de la web (pagos, indicadores, satisfacción).</td></tr>
+    </table>
+
+    <div class="nota"><strong>Conclusión:</strong> el modelo Canvas confirma que LexOnline es un negocio de servicios profesionales de estructura ligera: su propuesta de valor descansa en el talento del staff (B01/B06), se entrega por canales digitales de bajo costo (B03/B08) y monetiza con tarifas transparentes por uso y programas formativos (B05), manteniendo una estructura de costos casi totalmente variable (B09).</div>
+
+  </main>
+
+  <footer class="doc-pie">
+    <span>© 2026 LexOnline · Consultoría Jurídica y Academia Legal</span>
+    <span>
+      <a href="../index.html">← Volver a la web</a> &nbsp;|&nbsp;
+      <a href="documento-procesos.html">Ver Documento de Procesos →</a>
+    </span>
+  </footer>
+
+</div>
+</body>
+</html>

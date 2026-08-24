@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LexOnline — Documento de Procesos</title>
+  <meta name="description" content="Documento de procesos del estudio jurídico virtual LexOnline: mapa de procesos, fichas de proceso, actores e indicadores.">
+  <link rel="stylesheet" href="estilos-docs.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='24' fill='%230B2A5B'/%3E%3Ctext x='24' y='32' font-size='22' text-anchor='middle' fill='%23C9A227' font-family='Georgia'%3E%E2%9A%96%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="doc">
+
+  <!-- ================= PORTADA ================= -->
+  <header class="portada">
+    <span class="sello">LexOnline · Estudio Jurídico Virtual</span>
+    <h1>Documento de Procesos</h1>
+    <p>Consultoría Jurídica y Academia Legal 100% online</p>
+
+    <table class="meta-doc">
+      <tr><td>Proyecto</td><td>Web dinámica de estudio jurídico virtual (LexOnline)</td></tr>
+      <tr><td>Documento</td><td>DP-01 · Documento de Procesos</td></tr>
+      <tr><td>Versión</td><td>1.0</td></tr>
+      <tr><td>Fecha</td><td>22 de agosto de 2026</td></tr>
+      <tr><td>Elaborado por</td><td>Equipo LexOnline — Área de Desarrollo</td></tr>
+      <tr><td>Estado</td><td>Aprobado para revisión académica</td></tr>
+      <tr><td>Documentos relacionados</td><td>DF-01 · Documento Funcional (<a href="documento-funcional.html" style="color:#C9A227;">ver aquí</a>)<br>DC-01 · Modelo de Negocio Canvas (<a href="documento-canvas.html" style="color:#C9A227;">ver aquí</a>)</td></tr>
+    </table>
+  </header>
+
+  <main class="contenido">
+
+    <!-- ================= 1. OBJETIVO ================= -->
+    <h2 id="objetivo">1. Objetivo del documento</h2>
+    <p>Describir de manera ordenada los procesos de negocio que soporta la plataforma web <strong>LexOnline</strong>, un estudio jurídico virtual que ofrece <strong>consultoría legal por videollamada</strong> y <strong>cursos de formación jurídica</strong>. El documento define el mapa general de procesos, las fichas detalladas de cada proceso, los actores que intervienen y los indicadores con los que se mide la operación.</p>
+
+    <h2 id="alcance">2. Alcance</h2>
+    <ul>
+      <li><strong>Incluye:</strong> los procesos operativos que ocurren dentro de la web (agendamiento de consultas, inscripción a cursos, contacto, conexión a sala virtual) y los procesos de apoyo asociados (confirmación por WhatsApp, coordinación de pagos).</li>
+      <li><strong>No incluye:</strong> procesos internos del despacho no visibles en la plataforma (contabilidad, nómina, gestión de colegiatura) ni procesos judiciales ante órganos jurisdiccionales.</li>
+    </ul>
+
+    <!-- ================= 3. EL NEGOCIO ================= -->
+    <h2 id="negocio">3. Descripción del negocio</h2>
+    <p><strong>LexOnline</strong> es un estudio jurídico que opera sin oficina presencial: toda la atención al cliente se realiza a través de su página web, WhatsApp y Google Meet. Su propuesta combina dos líneas de servicio dictadas por el mismo staff de abogados colegiados:</p>
+
+    <table class="tabla">
+      <tr><th>Línea de servicio</th><th>Oferta actual</th><th>Rango de precio</th></tr>
+      <tr>
+        <td><strong>Consultoría Jurídica</strong></td>
+        <td>6 especialidades: Penal, Financiero, Propiedades, Laboral, Familia y Corporativo. Sesiones de 30 a 45 min por Google Meet.</td>
+        <td>S/ 80 – S/ 120 por sesión</td>
+      </tr>
+      <tr>
+        <td><strong>Academia Legal</strong></td>
+        <td>4 programas: cursos grabados, en vivo por Meet o híbridos, con certificado digital incluido.</td>
+        <td>S/ 199 – S/ 450 por programa</td>
+      </tr>
+    </table>
+
+    <div class="nota"><strong>Modelo de operación:</strong> el cliente agenda o se inscribe desde la web → recibe confirmación por WhatsApp → coordina el pago por ese mismo canal → se conecta por Google Meet el día y hora acordados. No hay trámites presenciales.</div>
+
+    <!-- ================= 4. MAPA DE PROCESOS ================= -->
+    <h2 id="mapa">4. Mapa de procesos</h2>
+
+    <h3>4.1 Procesos operativos (núcleo del negocio)</h3>
+    <table class="tabla">
+      <tr><th>Código</th><th>Proceso</th><th>Responsable</th></tr>
+      <tr><td>P01</td><td>Agendamiento de consulta jurídica</td><td>Sistema web + Cliente</td></tr>
+      <tr><td>P02</td><td>Confirmación y atención de la cita</td><td>Abogado asignado + Administrador</td></tr>
+      <tr><td>P03</td><td>Inscripción a cursos y diplomados</td><td>Sistema web + Cliente</td></tr>
+    </table>
+
+    <h3>4.2 Procesos de apoyo</h3>
+    <table class="tabla">
+      <tr><th>Código</th><th>Proceso</th><th>Responsable</th></tr>
+      <tr><td>P04</td><td>Contacto y soporte al cliente</td><td>Administrador</td></tr>
+      <tr><td>P05</td><td>Conexión a Sala Virtual (Meet)</td><td>Cliente / Alumno + Abogado / Docente</td></tr>
+    </table>
+
+    <h3>4.3 Procesos estratégicos y de gestión</h3>
+    <table class="tabla">
+      <tr><th>Código</th><th>Proceso</th><th>Responsable</th></tr>
+      <tr><td>P06</td><td>Gestión del catálogo (especialidades, precios, cursos, staff)</td><td>Socio administrador — se actualiza editando <code class="inline">js/datos.js</code></td></tr>
+      <tr><td>P07</td><td>Seguimiento de indicadores y satisfacción</td><td>Socio administrador</td></tr>
+    </table>
+
+    <!-- ================= 5. FICHAS DE PROCESO ================= -->
+    <h2 id="fichas">5. Fichas detalladas de procesos</h2>
+
+    <!-- P01 -->
+    <section class="ficha" id="p01">
+      <div class="ficha-cabecera">
+        <h3>P01 · Agendamiento de consulta jurídica</h3>
+        <span class="codigo-proceso">Operativo</span>
+      </div>
+      <div class="ficha-cuerpo">
+        <table class="tabla">
+          <tr><td style="width:160px;"><strong>Objetivo</strong></td><td>Permitir que el cliente reserve una consulta legal por videollamada eligiendo especialidad, abogado, fecha y hora.</td></tr>
+          <tr><td><strong>Actores</strong></td><td>Cliente (solicitante), Sistema web, Administrador (recepciona por WhatsApp).</td></tr>
+          <tr><td><strong>Entradas</strong></td><td>Especialidad seleccionada; abogado; fecha; hora; nombre del cliente; WhatsApp opcional.</td></tr>
+          <tr><td><strong>Salidas</strong></td><td>Mensaje de solicitud enviado por WhatsApp con el resumen de la cita; cita registrada en la bandeja del despacho.</td></tr>
+          <tr><td><strong>Canal</strong></td><td>Web (modal "Agendar consulta") → WhatsApp (<code class="inline">wa.me</code>).</td></tr>
+        </table>
+        <ol class="pasos-lista">
+          <li>El cliente ingresa a la sección <em>Consultoría Jurídica</em> y revisa el catálogo de especialidades generado dinámicamente.</li>
+          <li>Hace clic en <strong>"Agendar cita"</strong> en la especialidad de interés.</li>
+          <li>El sistema abre el modal de agendamiento mostrando especialidad, precio y duración, y carga automáticamente los abogados disponibles de esa especialidad.</li>
+          <li>El cliente completa: abogado, fecha, hora, nombre y (opcional) su número de WhatsApp.</li>
+          <li>El sistema valida que nombre, fecha y hora estén completos.</li>
+          <li>Al pulsar <strong>"Confirmar por WhatsApp"</strong>, se abre WhatsApp con un mensaje prellenado dirigido al estudio con todo el resumen.</li>
+          <li>El administrador recibe la solicitud y pasa al proceso P02 (confirmación y pago).</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- P02 -->
+    <section class="ficha" id="p02">
+      <div class="ficha-cabecera">
+        <h3>P02 · Confirmación y atención de la cita</h3>
+        <span class="codigo-proceso">Operativo</span>
+      </div>
+      <div class="ficha-cuerpo">
+        <table class="tabla">
+          <tr><td style="width:160px;"><strong>Objetivo</strong></td><td>Confirmar la cita recibida, coordinar el pago y brindar la asesoría en la fecha pactada.</td></tr>
+          <tr><td><strong>Actores</strong></td><td>Administrador, Abogado asignado, Cliente.</td></tr>
+          <tr><td><strong>Entradas</strong></td><td>Solicitud de cita recibida por WhatsApp (salida de P01).</td></tr>
+          <tr><td><strong>Salidas</strong></td><td>Cita confirmada; pago coordinado; link de Google Meet entregado al cliente.</td></tr>
+          <tr><td><strong>Canal</strong></td><td>WhatsApp + Google Meet.</td></tr>
+        </table>
+        <ol class="pasos-lista">
+          <li>El administrador revisa la disponibilidad real del abogado solicitado.</li>
+          <li>Confirma por WhatsApp la cita con el cliente y le comunica el medio y dato de pago.</li>
+          <li>El cliente realiza el pago ("pagas al confirmar tu cita") y envía su comprobante.</li>
+          <li>El administrador genera/envía el enlace de Google Meet de la sesión.</li>
+          <li>El día y hora pactados, el abogado atiende la consulta (30–45 min según especialidad) siguiendo el proceso P05.</li>
+          <li>Cerrada la sesión, el caso puede derivarse a orientación adicional o patrocinio formal (fuera del alcance web).</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- P03 -->
+    <section class="ficha" id="p03">
+      <div class="ficha-cabecera">
+        <h3>P03 · Inscripción a cursos y diplomados</h3>
+        <span class="codigo-proceso">Operativo</span>
+      </div>
+      <div class="ficha-cuerpo">
+        <table class="tabla">
+          <tr><td style="width:160px;"><strong>Objetivo</strong></td><td>Registrar al alumno en un curso o diplomado de la Academia Legal y entregarle el acceso correspondiente.</td></tr>
+          <tr><td><strong>Actores</strong></td><td>Alumno/Cliente, Sistema web, Administrador, Docente (abogado del staff).</td></tr>
+          <tr><td><strong>Entradas</strong></td><td>Curso elegido; nombre; correo; WhatsApp del interesado.</td></tr>
+          <tr><td><strong>Salidas</strong></td><td>Inscripción registrada; comprobante y datos de acceso enviados por correo o WhatsApp.</td></tr>
+          <tr><td><strong>Canal</strong></td><td>Web (modal "Inscribirme al curso") → WhatsApp.</td></tr>
+        </table>
+        <ol class="pasos-lista">
+          <li>El interesado explora el catálogo de cursos (grabado, en vivo por Meet o híbrido) con precio y docente visibles.</li>
+          <li>Pulsa <strong>"Inscribirme"</strong> y el modal muestra el nombre del curso, modalidad y precio.</li>
+          <li>Completa: nombre, correo y WhatsApp.</li>
+          <li>El sistema valida que el nombre esté completo.</li>
+          <li>Al pulsar <strong>"Inscribirme por WhatsApp"</strong>, abre WhatsApp con el mensaje prellenado de inscripción.</li>
+          <li>El administrador confirma vacantes, coordina el pago y envía el comprobante.</li>
+          <li>Entrega el acceso: link de clases en vivo (P05), material grabado o ambos, según modalidad.</li>
+          <li>Al completar el programa, se emite el certificado digital.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- P04 -->
+    <section class="ficha" id="p04">
+      <div class="ficha-cabecera">
+        <h3>P04 · Contacto y soporte al cliente</h3>
+        <span class="codigo-proceso">Apoyo</span>
+      </div>
+      <div class="ficha-cuerpo">
+        <table class="tabla">
+          <tr><td style="width:160px;"><strong>Objetivo</strong></td><td>Resolver dudas sobre consultas, cursos y precios corporativos antes de una contratación.</td></tr>
+          <tr><td><strong>Actores</strong></td><td>Visitante/Cliente, Administrador.</td></tr>
+          <tr><td><strong>Entradas</strong></td><td>Nombre, correo y mensaje del formulario de contacto; o mensaje directo al botón flotante de WhatsApp.</td></tr>
+          <tr><td><strong>Salidas</strong></td><td>Respuesta enviada por WhatsApp; eventual derivación a P01 o P03.</td></tr>
+          <tr><td><strong>Canal</strong></td><td>Formulario de contacto (web) → WhatsApp · Botón flotante "¿Necesitas ayuda?" · Correo.</td></tr>
+        </table>
+        <ol class="pasos-lista">
+          <li>El visitante escribe desde el formulario de contacto (nombre, correo, mensaje).</li>
+          <li>El sistema valida nombre y mensaje y abre WhatsApp con el texto prellenado.</li>
+          <li>También puede usar el botón flotante de WhatsApp visible en toda la web o escribir al correo institucional.</li>
+          <li>El administrador responde y, si corresponde, lo guía hacia agendar una consulta (P01) o inscribirse a un curso (P03).</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- P05 -->
+    <section class="ficha" id="p05">
+      <div class="ficha-cabecera">
+        <h3>P05 · Conexión a Sala Virtual (Google Meet)</h3>
+        <span class="codigo-proceso">Apoyo</span>
+      </div>
+      <div class="ficha-cuerpo">
+        <table class="tabla">
+          <tr><td style="width:160px;"><strong>Objetivo</strong></td><td>Facilitar el ingreso del cliente o alumno a su videollamada (consulta o clase) desde la propia plataforma.</td></tr>
+          <tr><td><strong>Actores</strong></td><td>Cliente/Alumno, Abogado/Docente, Sistema web.</td></tr>
+          <tr><td><strong>Entradas</strong></td><td>Link de Google Meet de la cita o clase (entregado tras la confirmación).</td></tr>
+          <tr><td><strong>Salidas</strong></td><td>Sesión de videollamada iniciada en pestaña nueva.</td></tr>
+          <tr><td><strong>Canal</strong></td><td>Sección "Sala Virtual" de la web → Google Meet.</td></tr>
+        </table>
+        <ol class="pasos-lista">
+          <li>Tras la confirmación (P02/P03), el usuario recibe su link de Google Meet.</li>
+          <li>Entra a la sección <em>Sala Virtual</em> y elige la pestaña <strong>"📹 Consulta jurídica"</strong> o <strong>"🎓 Aula virtual"</strong>.</li>
+          <li>Pega el link en el campo correspondiente.</li>
+          <li>El sistema valida que el enlace pertenezca a <code class="inline">meet.google.com</code>.</li>
+          <li>Al pulsar "Unirme"/"Ingresar", la videollamada se abre en una pestaña nueva del navegador.</li>
+        </ol>
+        <div class="nota"><strong>Nota técnica:</strong> Google Meet bloquea su embebido dentro de iframes de terceros, por lo que el acceso correcto se hace abriendo la reunión en pestaña nueva.</div>
+      </div>
+    </section>
+
+    <!-- ================= 6. ACTORES ================= -->
+    <h2 id="actores">6. Actores y roles</h2>
+    <table class="tabla">
+      <tr><th>Actor</th><th>Rol</th><th>Responsabilidades principales</th></tr>
+      <tr><td><strong>Cliente / Alumno</strong></td><td>Usuario final externo</td><td>Navega el catálogo, agenda consultas, se inscribe a cursos, paga y se conecta por Meet.</td></tr>
+      <tr><td><strong>Abogado / Docente</strong></td><td>Prestador del servicio</td><td>Atiende consultas de su especialidad y dicta cursos; figura en el staff con su número de colegiatura visible.</td></tr>
+      <tr><td><strong>Administrador</strong></td><td>Operador interno</td><td>Recepciona solicitudes por WhatsApp, confirma citas e inscripciones, coordina pagos, entrega links y certificados.</td></tr>
+      <tr><td><strong>Sistema web</strong></td><td>Canal digital automatizado</td><td>Muestra catálogos dinámicos, valida formularios, arma los mensajes y redirige a WhatsApp/Meet.</td></tr>
+    </table>
+
+    <!-- ================= 7. INDICADORES ================= -->
+    <h2 id="indicadores">7. Indicadores básicos de la operación</h2>
+    <table class="tabla">
+      <tr><th>Indicador</th><th>Fuente</th><th>Valor publicado en la web</th></tr>
+      <tr><td>Abogados colegiados en staff</td><td>Objeto <code class="inline">LEX.abogados</code> (datos.js)</td><td>8 (se calcula automáticamente)</td></tr>
+      <tr><td>Especialidades activas</td><td><code class="inline">LEX.especialidades</code></td><td>6 (se calcula automáticamente)</td></tr>
+      <tr><td>Cursos y diplomados</td><td><code class="inline">LEX.cursos</code></td><td>4 (se calcula automáticamente)</td></tr>
+      <tr><td>Citas atendidas (acumulado histórico)</td><td>Dato fijo informativo</td><td>+500</td></tr>
+    </table>
+    <p style="margin-top:10px;">Los tres primeros indicadores se renderizan dinámicamente: al actualizar el catálogo en <code class="inline">js/datos.js</code>, la sección de estadísticas de la portada se recalcula sola.</p>
+
+  </main>
+
+  <footer class="doc-pie">
+    <span>© 2026 LexOnline · Consultoría Jurídica y Academia Legal</span>
+    <span>
+      <a href="../index.html">← Volver a la web</a> &nbsp;|&nbsp;
+      <a href="documento-funcional.html">Ver Documento Funcional →</a> &nbsp;|&nbsp;
+      <a href="documento-canvas.html">Ver Modelo Canvas →</a>
+    </span>
+  </footer>
+
+</div>
+</body>
+</html>

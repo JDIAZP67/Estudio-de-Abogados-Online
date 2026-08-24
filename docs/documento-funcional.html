@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LexOnline — Documento Funcional</title>
+  <meta name="description" content="Documento Funcional de LexOnline: requisitos funcionales y no funcionales de la plataforma web del estudio jurídico virtual.">
+  <link rel="stylesheet" href="estilos-docs.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='24' fill='%230B2A5B'/%3E%3Ctext x='24' y='32' font-size='22' text-anchor='middle' fill='%23C9A227' font-family='Georgia'%3E%E2%9A%96%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="doc">
+
+  <!-- ================= PORTADA ================= -->
+  <header class="portada">
+    <span class="sello">LexOnline · Estudio Jurídico Virtual</span>
+    <h1>Documento Funcional</h1>
+    <p>Consultoría Jurídica y Academia Legal 100% online</p>
+
+    <table class="meta-doc">
+      <tr><td>Proyecto</td><td>Web dinámica de estudio jurídico virtual (LexOnline)</td></tr>
+      <tr><td>Documento</td><td>DF-01 · Documento Funcional</td></tr>
+      <tr><td>Versión</td><td>1.0</td></tr>
+      <tr><td>Fecha</td><td>23 de agosto de 2026</td></tr>
+      <tr><td>Elaborado por</td><td>Equipo LexOnline — Área de Desarrollo</td></tr>
+      <tr><td>Estado</td><td>En elaboración</td></tr>
+      <tr><td>Documentos relacionados</td><td>DP-01 · Documento de Procesos (<a href="documento-procesos.html" style="color:#C9A227;">ver aquí</a>)<br>DC-01 · Modelo de Negocio Canvas (<a href="documento-canvas.html" style="color:#C9A227;">ver aquí</a>)</td></tr>
+    </table>
+  </header>
+
+  <main class="contenido">
+
+    <!-- ================= 1. OBJETIVO ================= -->
+    <h2 id="objetivo">1. Objetivo del documento</h2>
+    <p>Especificar los <strong>requisitos funcionales y no funcionales</strong> de la plataforma web <strong>LexOnline</strong>: qué debe poder hacer el usuario (agendar consultas, inscribirse a cursos, contactarse, conectarse a la sala virtual), cómo debe comportarse el sistema ante cada interacción y qué criterios de calidad debe cumplir la entrega.</p>
+    <div class="nota"><strong>Estado:</strong> este documento se encuentra en elaboración. Mientras tanto, el detalle funcional de cada flujo puede revisarse en las fichas de proceso P01–P07 del <a href="documento-procesos.html">DP-01 · Documento de Procesos</a>, que describen paso a paso el comportamiento actual de la plataforma.</div>
+
+    <!-- ================= 2. MODELO DE DATOS ================= -->
+    <h2 id="modelo-datos">2. Modelo de datos vigente</h2>
+    <p>Todo el catálogo de la plataforma vive en un único archivo: <code class="inline">js/datos.js</code>, que expone el objeto global <code class="inline">LEX</code>. El modelo aplica el principio de <strong>una sola fuente de verdad</strong>: cada entidad se define una vez con su <code class="inline">id</code>, y las demás entidades la referencian por ese identificador — nunca duplicando nombres.</p>
+
+    <h3>2.1 Entidades y campos</h3>
+    <table class="tabla">
+      <tr><th>Entidad</th><th>Campo</th><th>Tipo</th><th>Descripción</th></tr>
+      <tr><td rowspan="3"><strong>abogados</strong><br><small>(staff)</small></td><td><code class="inline">id</code></td><td>texto · clave</td><td>Identificador único, kebab-case (ej.: <code class="inline">ana-torres</code>).</td></tr>
+      <tr><td><code class="inline">nombre</code></td><td>texto</td><td>Nombre completo con tratamiento (Dr./Dra.).</td></tr>
+      <tr><td><code class="inline">cal</code></td><td>texto</td><td>Número de colegiatura visible al público.</td></tr>
+      <tr><td rowspan="6"><strong>especialidades</strong></td><td><code class="inline">id</code></td><td>texto · clave</td><td>Ej.: <code class="inline">penal</code>, <code class="inline">financiero</code>.</td></tr>
+      <tr><td><code class="inline">nombre</code> / <code class="inline">descripcion</code></td><td>texto</td><td>Datos mostrados en la tarjeta.</td></tr>
+      <tr><td><code class="inline">duracion</code></td><td>texto</td><td>Duración de la sesión (30/45 min).</td></tr>
+      <tr><td><code class="inline">precio</code></td><td>número</td><td>Tarifa por sesión en soles (&gt; 0).</td></tr>
+      <tr><td><code class="inline">abogadosIds</code></td><td>array de ids</td><td>Abogados habilitados para la especialidad (relación N:M).</td></tr>
+      <tr><td colspan="3" style="color:var(--gris-texto);"><em>Obliga a que cada especialidad tenga al menos un abogado asignado.</em></td></tr>
+      <tr><td rowspan="5"><strong>cursos</strong></td><td><code class="inline">id</code></td><td>texto · clave</td><td>Ej.: <code class="inline">diplomado-finanzas</code>.</td></tr>
+      <tr><td><code class="inline">modalidad</code> / <code class="inline">modulos</code></td><td>texto</td><td>Grabado · En vivo (Meet) · Híbrido; contenido del programa.</td></tr>
+      <tr><td><code class="inline">precio</code></td><td>número</td><td>Costo del programa en soles (&gt; 0).</td></tr>
+      <tr><td><code class="inline">docenteId</code></td><td>id</td><td>Docente responsable (relación N:1 con abogados).</td></tr>
+      <tr><td><code class="inline">descripcion</code></td><td>texto</td><td>Incluye mención de certificado.</td></tr>
+      <tr><td rowspan="2"><strong>pagos</strong></td><td><code class="inline">yape / plin / transferencia</code></td><td>booleano</td><td>Medios manuales coordinados por WhatsApp (fase 1).</td></tr>
+      <tr><td><code class="inline">enlacesOnline[]</code></td><td>array</td><td>Fase 2: <code class="inline">{ id, nombre, url, productoId }</code> — cada enlace apunta a una especialidad o curso.</td></tr>
+    </table>
+
+    <h3>2.2 Relaciones</h3>
+    <table class="tabla">
+      <tr><th>Relación</th><th>Cardinalidad</th><th>Campo que la implementa</th></tr>
+      <tr><td>especialidad ↔ abogado</td><td>N:M</td><td><code class="inline">especialidades[].abogadosIds</code></td></tr>
+      <tr><td>curso → docente (abogado)</td><td>N:1</td><td><code class="inline">cursos[].docenteId</code></td></tr>
+      <tr><td>enlacePago → producto</td><td>N:1</td><td><code class="inline">pagos.enlacesOnline[].productoId</code></td></tr>
+    </table>
+
+    <h3>2.3 Validador automático de integridad</h3>
+    <p>Al cargar la página, <code class="inline">js/main.js</code> invoca <code class="inline">LEX.validarLex()</code>, que verifica: ids únicos por colección, que todo <code class="inline">abogadoId</code>, <code class="inline">docenteId</code> y <code class="inline">productoId</code> exista, que ninguna especialidad quede sin abogados y que los precios sean mayores a cero. Los problemas se reportan en la consola del navegador sin interrumpir el sitio.</p>
+
+    <h3>2.4 Guía operativa: cómo actualizar el catálogo</h3>
+    <ol class="pasos-lista">
+      <li><strong>Agregar un abogado:</strong> añadir su objeto a <code class="inline">LEX.abogados</code> con un <code class="inline">id</code> nuevo (aparece solo en la sección Staff).</li>
+      <li><strong>Asignarlo a una especialidad:</strong> agregar ese <code class="inline">id</code> al array <code class="inline">abogadosIds</code> de la especialidad correspondiente.</li>
+      <li><strong>Crear un curso:</strong> añadir objeto a <code class="inline">LEX.cursos</code> usando un <code class="inline">docenteId</code> existente.</li>
+      <li><strong>Registrar enlace de pago (fase 2):</strong> agregar <code class="inline">{ id, nombre, url, productoId }</code> a <code class="inline">pagos.enlacesOnline</code>; los botones "Pagar" aparecen automáticamente.</li>
+      <li><strong>Verificar:</strong> recargar la web; si la consola no muestra avisos, el catálogo quedó íntegro. Las estadísticas de la portada se recalculan solas.</li>
+    </ol>
+
+    <!-- ================= 3. ESTRUCTURA PREVISTA ================= -->
+    <h2 id="estructura">3. Estructura prevista del documento</h2>
+    <table class="tabla">
+      <tr><th>Sección</th><th>Contenido planeado</th></tr>
+      <tr><td>4. Alcance funcional</td><td>Módulos incluidos en la entrega: catálogos dinámicos, agendamiento Cal.com, inscripción a cursos, contacto por WhatsApp, sala virtual.</td></tr>
+      <tr><td>5. Requisitos funcionales (RF)</td><td>Catálogo numerado RF-01…RF-n con descripción, actor, prioridad (Alta/Media/Baja) y criterio de aceptación.</td></tr>
+      <tr><td>6. Requisitos no funcionales (RNF)</td><td>Rendimiento, responsividad (móvil/escritorio), accesibilidad, seguridad de datos personales, compatibilidad de navegadores.</td></tr>
+      <tr><td>7. Reglas de negocio</td><td>Validaciones de formularios, política de reprogramación (24 h), confirmación de pago antes del acceso, emisión de certificados.</td></tr>
+      <tr><td>8. Matriz de trazabilidad</td><td>Cruce RF ↔ Procesos (P01–P07) ↔ Bloques Canvas (B01–B09).</td></tr>
+    </table>
+
+    <p style="margin-top:14px;">La sección 4 tomará como base los flujos ya implementados en <code class="inline">index.html</code>, <code class="inline">js/main.js</code> y <code class="inline">js/datos.js</code>; la matriz de trazabilidad enlazará con la tabla de cruce del <a href="documento-canvas.html">DC-01 · Modelo Canvas</a>.</p>
+
+    <!-- ================= ANEXO: ACTIVACIÓN PAGO ONLINE ================= -->
+    <h2 id="anexo-pagos">Anexo · Activación del pago online directo (fase 2)</h2>
+    <p>Actualmente los pagos se coordinan por WhatsApp (Yape, Plin o transferencia) una vez confirmada la cita o inscripción, según la sección <strong>"Cómo pagar"</strong> de la web. Por seguridad, no se publican números ni códigos QR en la plataforma.</p>
+    <p>La plataforma ya tiene preparado el módulo de <strong>pago online directo</strong>. Para activarlo cuando el estudio disponga de su cuenta de pasarela (Mercado Pago, Culqi o Izipay), seguir estos pasos:</p>
+    <ol class="pasos-lista">
+      <li><strong>Crear la cuenta empresa</strong> en la pasarela elegida y completar la validación KYC con los datos del titular del negocio.</li>
+      <li><strong>Generar un enlace de pago</strong> por cada producto que se cobre automáticamente (cada especialidad de consulta y cada curso del catálogo).</li>
+      <li><strong>Registrar los enlaces</strong> en <code class="inline">js/datos.js</code>, dentro de <code class="inline">LEX.pagos.enlacesOnline</code>, con el formato <code class="inline">{ nombre: "Derecho Penal", url: "https://mpago.la/..." }</code>.</li>
+      <li><strong>Publicar los cambios:</strong> la sección "Cómo pagar" renderizará automáticamente un botón "Pagar" por cada enlace, y el badge pasará de "próximamente" a "Pago online directo disponible". No se requiere tocar HTML ni JS adicional.</li>
+      <li><strong>Opcional:</strong> comunicar a Cal.com/WhatsApp el flujo para enviar el comprobante de pasarela en lugar de la captura manual.</li>
+    </ol>
+    <div class="nota"><strong>Criterio de aceptación fase 2:</strong> con al menos un enlace registrado, el visitante puede pagar desde la web sin coordinación previa; el administrador recibe la notificación de la pasarela y confirma el acceso (link Meet / material del curso).</div>
+
+  </main>
+
+  <footer class="doc-pie">
+    <span>© 2026 LexOnline · Consultoría Jurídica y Academia Legal</span>
+    <span>
+      <a href="../index.html">← Volver a la web</a> &nbsp;|&nbsp;
+      <a href="documento-procesos.html">Ver Documento de Procesos →</a> &nbsp;|&nbsp;
+      <a href="documento-canvas.html">Ver Modelo Canvas →</a>
+    </span>
+  </footer>
+
+</div>
+</body>
+</html>
