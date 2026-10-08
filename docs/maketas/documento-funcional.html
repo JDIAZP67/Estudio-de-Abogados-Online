@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LexOnline — Documento Funcional</title>
+  <meta name="description" content="Documento funcional del sistema web LexOnline: arquitectura, módulos, requisitos funcionales y no funcionales, modelo de datos, reglas de negocio e integraciones.">
+  <link rel="stylesheet" href="estilos-docs.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='24' fill='%230B2A5B'/%3E%3Ctext x='24' y='32' font-size='22' text-anchor='middle' fill='%23C9A227' font-family='Georgia'%3E%E2%9A%96%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="doc">
+
+  <!-- ================= PORTADA ================= -->
+  <header class="portada">
+    <span class="sello">LexOnline · Estudio Jurídico Virtual</span>
+    <h1>Documento Funcional</h1>
+    <p>Sistema web dinámico de consultoría jurídica y academia legal</p>
+
+    <table class="meta-doc">
+      <tr><td>Proyecto</td><td>Web dinámica de estudio jurídico virtual (LexOnline)</td></tr>
+      <tr><td>Documento</td><td>DF-01 · Documento Funcional</td></tr>
+      <tr><td>Versión</td><td>1.0</td></tr>
+      <tr><td>Fecha</td><td>22 de agosto de 2026</td></tr>
+      <tr><td>Elaborado por</td><td>Equipo LexOnline — Área de Desarrollo</td></tr>
+      <tr><td>Estado</td><td>Aprobado para revisión académica</td></tr>
+      <tr><td>Documentos relacionados</td><td>DP-01 · Documento de Procesos (<a href="documento-procesos.html" style="color:#C9A227;">ver aquí</a>)</td></tr>
+    </table>
+  </header>
+
+  <main class="contenido">
+
+    <!-- ================= 1. INTRODUCCIÓN ================= -->
+    <h2 id="introduccion">1. Introducción y objetivo del sistema</h2>
+    <p><strong>LexOnline</strong> es un sistema web estático-dinámico que digitaliza la atención de un estudio jurídico: permite al público <strong>agendar consultas legales por videollamada</strong>, <strong>inscribirse a cursos y diplomados</strong>, conocer al <strong>staff de abogados colegiados</strong> y conectarse a una <strong>sala virtual</strong>, todo gestionado mediante canales digitales (WhatsApp y Google Meet).</p>
+    <p>El objetivo funcional del sistema es servir de vitrina y canal de captación automatizado: presenta el catálogo completo generado desde un único archivo de datos y convierte cada acción del usuario (agendar, inscribirse, escribir) en un mensaje estructurado enviado por WhatsApp al estudio.</p>
+
+    <!-- ================= 2. ALCANCE ================= -->
+    <h2 id="alcance">2. Alcance</h2>
+    <ul>
+      <li><strong>Incluye:</strong> página única (one-page) con catálogos dinámicos, formularios con validación, modales de agendamiento e inscripción, sala virtual con acceso a Google Meet, modales legales y diseño responsive.</li>
+      <li><strong>No incluye:</strong> pasarela de pagos en línea, panel administrativo, base de datos en servidor ni autenticación de usuarios. La gestión posterior (confirmación y cobro) se realiza manualmente por WhatsApp.</li>
+    </ul>
+
+    <!-- ================= 3. ARQUITECTURA ================= -->
+    <h2 id="arquitectura">3. Arquitectura técnica</h2>
+    <p>Aplicación de una sola página construida con <strong>HTML5 + CSS3 + JavaScript vanilla (ES6)</strong>, sin frameworks ni dependencias externas. Sigue una arquitectura de tres capas:</p>
+
+    <pre>/proyecto
+├── index.html          → Estructura y secciones de la página
+├── css/
+│   └── estilos.css     → Presentación (paleta institucional, responsive, modales)
+├── js/
+│   ├── datos.js        → CAPA DE DATOS: objeto LEX (catálogo completo)
+│   └── main.js         → Lógica: render dinámico, modales, validaciones, WhatsApp
+└── img/                → Reservado para imágenes</pre>
+
+    <table class="tabla">
+      <tr><th>Capa</th><th>Archivo(s)</th><th>Responsabilidad</th></tr>
+      <tr><td><strong>Estructura</strong></td><td><code class="inline">index.html</code></td><td>Contenedores vacíos (<code class="inline">#especialidades-grid</code>, <code class="inline">#cursos-grid</code>, <code class="inline">#staff-grid</code>) que el JS llena; secciones, modales y formulario.</td></tr>
+      <tr><td><strong>Presentación</strong></td><td><code class="inline">css/estilos.css</code></td><td>Estilos con variables de marca (azul marino <code class="inline">#0B2A5B</code>, dorado <code class="inline">#C9A227</code>), grillas flexibles, media queries y estados de modales/tabs.</td></tr>
+      <tr><td><strong>Datos</strong></td><td><code class="inline">js/datos.js</code></td><td>Objeto global <code class="inline">LEX</code>: única fuente de verdad del catálogo y datos de contacto.</td></tr>
+      <tr><td><strong>Comportamiento</strong></td><td><code class="inline">js/main.js</code></td><td>IIFE que renderiza los catálogos con template literals, gestiona modales, valida formularios y arma los enlaces de WhatsApp.</td></tr>
+    </table>
+
+    <!-- ================= 4. USUARIOS ================= -->
+    <h2 id="usuarios">4. Usuarios del sistema</h2>
+    <table class="tabla">
+      <tr><th>Usuario</th><th>Tipo de acceso</th><th>Acciones disponibles</th></tr>
+      <tr><td>Visitante / Cliente / Alumno</td><td>Público, sin registro</td><td>Navegar catálogos, agendar consulta, inscribirse a cursos, contactar, entrar a sala virtual.</td></tr>
+      <tr><td>Administrador del estudio</td><td>Externo a la web (WhatsApp)</td><td>Recepciona solicitudes, confirma, coordina pagos, entrega links y certificados.</td></tr>
+      <tr><td>Desarrollador / Editor</td><td>Edición de archivos</td><td>Actualiza catálogo y precios editando <code class="inline">js/datos.js</code>; despliega en hosting estático.</td></tr>
+    </table>
+
+    <!-- ================= 5. MÓDULOS ================= -->
+    <h2 id="modulos">5. Módulos funcionales</h2>
+    <table class="tabla">
+      <tr><th>Código</th><th>Módulo</th><th>Descripción funcional</th></tr>
+      <tr><td>M01</td><td><strong>Portada y estadísticas</strong></td><td>Hero con propuesta de valor, botones de acción y contadores automáticos (abogados, especialidades, cursos) calculados desde <code class="inline">LEX</code>.</td></tr>
+      <tr><td>M02</td><td><strong>Cómo funciona</strong></td><td>Explicación del flujo en 4 pasos: Elige → Agenda → Confirma → Conéctate.</td></tr>
+      <tr><td>M03</td><td><strong>Consultoría Jurídica</strong></td><td>Catálogo dinámico de especialidades con descripción, abogados, duración, precio y modal de agendamiento.</td></tr>
+      <tr><td>M04</td><td><strong>Academia Legal</strong></td><td>Catálogo dinámico de cursos/diplomados con modalidad, docente, precio y modal de inscripción.</td></tr>
+      <tr><td>M05</td><td><strong>Staff</strong></td><td>Grilla de abogados colegiados generada dinámicamente; avatar con inicial del nombre y número de colegiatura visible.</td></tr>
+      <tr><td>M06</td><td><strong>Sala Virtual</strong></td><td>Pestañas «Consulta jurídica» y «Aula virtual»: el usuario pega su link de Google Meet, el sistema lo valida y permite ingresar.</td></tr>
+      <tr><td>M07</td><td><strong>Testimonios</strong></td><td>Sección informativa con reseñas de clientes (contenido fijo en el HTML).</td></tr>
+      <tr><td>M08</td><td><strong>Contacto</strong></td><td>Datos de contacto dinámicos (WhatsApp, correo) + formulario que envía el mensaje por WhatsApp.</td></tr>
+      <tr><td>M09</td><td><strong>Transversales</strong></td><td>Modales legales (Términos y Privacidad), menú hamburguesa responsive, botón flotante de WhatsApp, cierre de modales con × / clic fuera / tecla Escape.</td></tr>
+    </table>
+
+    <!-- ================= 6. REQUISITOS FUNCIONALES ================= -->
+    <h2 id="rf">6. Requisitos funcionales</h2>
+
+    <h3>6.1 Renderizado dinámico (M01, M03–M05, M08)</h3>
+    <table class="tabla">
+      <tr><th>ID</th><th>Requisito</th><th>Prioridad</th></tr>
+      <tr><td>RF-01</td><td>El sistema debe generar las tarjetas de especialidades leyendo el arreglo <code class="inline">LEX.especialidades</code> (nombre, descripción, abogados, duración, precio).</td><td><span class="badge badge-alta">Alta</span></td></tr>
+      <tr><td>RF-02</td><td>El sistema debe generar las tarjetas de cursos leyendo <code class="inline">LEX.cursos</code> (nombre, modalidad, descripción, docente, módulos, precio).</td><td><span class="badge badge-alta">Alta</span></td></tr>
+      <tr><td>RF-03</td><td>El sistema debe generar las tarjetas del staff desde <code class="inline">LEX.abogados</code>, mostrando inicial como avatar, nombre, especialidad y calificación colegial.</td><td><span class="badge badge-alta">Alta</span></td></tr>
+      <tr><td>RF-04</td><td>Los contadores de portada (abogados, especialidades, cursos) deben calcularse automáticamente según la longitud de cada arreglo de datos.</td><td><span class="badge badge-media">Media</span></td></tr>
+      <tr><td>RF-05</td><td>Los datos de contacto mostrados (número WhatsApp, correo) y el enlace del botón flotante deben tomarse de <code class="inline">LEX.whatsapp</code> y <code class="inline">LEX.correo</code>.</td><td><span class="badge badge-media">Media</span></td></tr>
+    </table>
+
+    <h3>6.2 Agendamiento de consultas (M03)</h3>
+    <table class="tabla">
+      <tr><th>ID</th><th>Requisito</th><th>Prioridad</th></tr>
+      <tr><td>RF-06</td><td>Al pulsar «Agendar cita» debe abrirse un modal con especialidad, precio y duración de la tarjeta elegida.</td><td><span class="badge badge-alta">Alta</span></td></tr>
+      <tr><td>RF-07</td><td>El selector de abogados del modal debe listar únicamente los abogados asignados a esa especialidad en los datos.</td><td><span class="badge badge-alta">Alta</span></td></tr>
+      <tr><td>RF-08</td><td>El modal de cita debe permitir seleccionar fecha (input date), hora (input time), nombre y WhatsApp opcional.</td><td><span class="badge badge-alta">Alta</span></td></tr>
+      <tr><td>RF-09</td><td>El sistema debe validar que nombre, fecha y hora estén completos antes de enviar; si falta alguno, mostrar alerta y no enviar.</td><td><span class="badge badge-alta">Alta</span></td></tr>
+      <tr><td>RF-10</td><td>Al confirmar, debe abrirse WhatsApp con mensaje prellenado: especialidad, precio, abogado, fecha, hora, nombre y WhatsApp del cliente.</td><td><span class="badge badge-alta">Alta</span></td></tr>
+    </table>
+
+    <h3>6.3 Inscripciones y contacto (M04, M08)</h3>
+    <table class="tabla">
+      <tr><th>ID</th><th>Requisito</th><th>Prioridad</th></tr>
+      <tr><td>RF-11</td><td>Al pulsar «Inscribirme» debe abrirse un modal con el curso, su modalidad y su precio.</td><td><span class="badge badge-alta">Alta</span></td></tr>
+      <tr><td>RF-12</td><td>La inscripción debe solicitar nombre (obligatorio), correo y WhatsApp (opcionales) y validar el nombre antes de enviar.</td><td><span class="badge badge-alta">Alta</span></td></tr>
+      <tr><td>RF-13</td><td>Al confirmar inscripción, debe abrirse WhatsApp con mensaje prellenado: curso, precio, modalidad y datos del interesado.</td><td><span class="badge badge-alta">Alta</span></td></tr>
+      <tr><td>RF-14</td><td>El formulario de contacto debe validar nombre y mensaje, y abrir WhatsApp con el texto prellenado incluyendo correo si se ingresó.</td><td><span class="badge badge-alta">Alta</span></td></tr>
+    </table>
+
+    <h3>6.4 Sala Virtual y transversales (M06, M09)</h3>
+    <table class="tabla">
+      <tr><th>ID</th><th>Requisito</th><th>Prioridad</th></tr>
+      <tr><td>RF-15</td><td>La Sala Virtual debe ofrecer dos pestañas conmutables: «Consulta jurídica» y «Aula virtual», cada una con su propio campo de link.</td><td><span class="badge badge-media">Media</span></td></tr>
+      <tr><td>RF-16</td><td>El sistema debe validar que el enlace ingresado pertenezca a <code class="inline">meet.google.com</code>; si no, mostrar alerta y no continuar.</td><td><span class="badge badge-alta">Alta</span></td></tr>
+      <tr><td>RF-17</td><td>Al confirmar un link válido, el sistema debe iniciar la conexión a la reunión (unirse a consulta o ingresar a clase).</td><td><span class="badge badge-alta">Alta</span></td></tr>
+      <tr><td>RF-18</td><td>Todo modal debe poder cerrarse con el botón ×, haciendo clic fuera del contenido o presionando la tecla Escape; al cerrarse se restaura el scroll de la página.</td><td><span class="badge badge-media">Media</span></td></tr>
+      <tr><td>RF-19</td><td>En pantallas pequeñas, el menú de navegación debe colapsarse tras un botón hamburguesa que muestre/oculte los enlaces.</td><td><span class="badge badge-media">Media</span></td></tr>
+      <tr><td>RF-20</td><td>Desde el pie de página deben abrirse los modales informativos de Términos y Condiciones y Política de Privacidad.</td><td><span class="badge badge-baja">Baja</span></td></tr>
+    </table>
+
+    <!-- ================= 7. REQUISITOS NO FUNCIONALES ================= -->
+    <h2 id="rnf">7. Requisitos no funcionales</h2>
+    <table class="tabla">
+      <tr><th>ID</th><th>Categoría</th><th>Requisito</th></tr>
+      <tr><td>RNF-01</td><td>Responsive</td><td>Adaptable a móvil, tablet y escritorio mediante media queries y menú colapsable.</td></tr>
+      <tr><td>RNF-02</td><td>Rendimiento</td><td>JavaScript vanilla sin librerías ni CDN externos: carga ligera y funcionamiento offline básico.</td></tr>
+      <tr><td>RNF-03</td><td>Mantenibilidad</td><td>El contenido comercial vive separado del código: actualizar precios/catálogo solo requiere editar <code class="inline">datos.js</code>.</td></tr>
+      <tr><td>RNF-04</td><td>Compatibilidad</td><td>Funciona en navegadores modernos (Chrome, Edge, Firefox) usando ES6+, Flexbox/Grid.</td></tr>
+      <tr><td>RNF-05</td><td>Accesibilidad</td><td>Uso de <code class="inline">aria-label</code> en controles clave, contraste alto y jerarquía semántica de encabezados.</td></tr>
+      <tr><td>RNF-06</td><td>Seguridad/privacidad</td><td>Enlaces externos con <code class="inline">rel="noopener"</code>; la web no almacena datos personales en servidor ni usa cookies.</td></tr>
+      <tr><td>RNF-07</td><td>Identidad visual</td><td>Paleta institucional consistente (azul marino #0B2A5B · dorado #C9A227) en web y documentos.</td></tr>
+      <tr><td>RNF-08</td><td>Portabilidad</td><td>Sitio 100% estático publicable en cualquier hosting (GitHub Pages u otro) sin requisitos de servidor.</td></tr>
+    </table>
+
+    <!-- ================= 8. MODELO DE DATOS ================= -->
+    <h2 id="datos">8. Modelo de datos</h2>
+    <p>Toda la información comercial del sistema reside en el objeto global <code class="inline">LEX</code> (archivo <code class="inline">js/datos.js</code>). Es la única fuente de verdad: la web se renderiza a partir de él.</p>
+
+<pre>const LEX = {
+  whatsapp: "51999999999",            // Número institucional (sin "+")
+  correo:   "contacto@lexonline.com",
+
+  especialidades: [                   // Catálogo M03
+    { id: "penal",                    // identificador único
+      nombre: "Derecho Penal",
+      descripcion: "...",             // texto de la tarjeta
+      abogados: ["Dr. Luis Pérez", "Dra. María López"],
+      duracion: "30 min",             // duración de la sesión
+      precio: 80 },                   // precio en soles
+    // ... 6 especialidades en total
+  ],
+
+  cursos: [                           // Catálogo M04
+    { id: "curso-penal",
+      nombre: "Derecho Penal Aplicado",
+      modalidad: "Grabado | En vivo (Meet) | Híbrido",
+      descripcion: "...",
+      modulos: "12 videos",
+      precio: 199,
+      docente: "Dr. Luis Pérez" },
+    // ... 4 programas en total
+  ],
+
+  abogados: [                         // Staff M05
+    { nombre: "Dr. Luis Pérez",
+      especialidad: "Derecho Penal",
+      cal: "CAL 12345" }              // nº de colegiatura visible
+    // ... 8 miembros en total
+  ]
+};</pre>
+
+    <table class="tabla">
+      <tr><th>Colección</th><th>Cantidad actual</th><th>Campos</th></tr>
+      <tr><td><code class="inline">especialidades[]</code></td><td>6</td><td>id, nombre, descripcion, abogados[], duracion, precio</td></tr>
+      <tr><td><code class="inline">cursos[]</code></td><td>4</td><td>id, nombre, modalidad, descripcion, modulos, precio, docente</td></tr>
+      <tr><td><code class="inline">abogados[]</code></td><td>8</td><td>nombre, especialidad, cal</td></tr>
+      <tr><td>Contacto</td><td>—</td><td>whatsapp, correo</td></tr>
+    </table>
+
+    <!-- ================= 9. REGLAS DE NEGOCIO ================= -->
+    <h2 id="reglas">9. Reglas de negocio</h2>
+    <table class="tabla">
+      <tr><th>ID</th><th>Regla</th></tr>
+      <tr><td>RB-01</td><td>Los precios se expresan en soles (S/) y están definidos únicamente en <code class="inline">datos.js</code>; ninguna otra parte del código contiene precios.</td></tr>
+      <tr><td>RB-02</td><td>Solo pueden elegirse, para una cita, los abogados asignados previamente a esa especialidad en los datos.</td></tr>
+      <tr><td>RB-03</td><td>Una solicitud de cita requiere: nombre del cliente, fecha y hora. El WhatsApp del cliente es opcional.</td></tr>
+      <tr><td>RB-04</td><td>Una inscripción requiere nombre; el correo y WhatsApp son opcionales pero recomendados para recibir comprobante y acceso.</td></tr>
+      <tr><td>RB-05</td><td>Un mensaje de contacto requiere nombre y mensaje; el correo es opcional.</td></tr>
+      <tr><td>RB-06</td><td>La Sala Virtual solo acepta enlaces cuyo dominio sea <code class="inline">meet.google.com</code>; cualquier otro texto es rechazado con alerta.</td></tr>
+      <tr><td>RB-07</td><td>Los pagos no se procesan dentro de la web: se coordinan por WhatsApp una vez enviada la solicitud («pagas al confirmar tu cita»).</td></tr>
+      <tr><td>RB-08</td><td>Todos los mensajes generados (cita, inscripción, contacto) se dirigen al número institucional <code class="inline">LEX.whatsapp</code>, nunca a números ingresados por el usuario.</td></tr>
+      <tr><td>RB-09</td><td>Las consultas constituyen orientación profesional y no sustituyen patrocinio formal; esta advertencia figura en el aviso legal del modal y en los Términos y Condiciones.</td></tr>
+    </table>
+
+    <!-- ================= 10. INTEGRACIONES ================= -->
+    <h2 id="integraciones">10. Integraciones externas</h2>
+    <table class="tabla">
+      <tr><th>Canal</th><th>Uso en el sistema</th><th>Implementación técnica</th></tr>
+      <tr><td><strong>WhatsApp</strong></td><td>Canal único de conversión: solicitudes de cita, inscripciones y mensajes de contacto llegan prellenados al estudio.</td><td><code class="inline">window.open("https://wa.me/" + LEX.whatsapp + "?text=" + encodeURIComponent(msg))</code> desde los tres formularios y el botón flotante.</td></tr>
+      <tr><td><strong>Google Meet</strong></td><td>Videollamadas de consultas y clases en vivo; entrega del link tras la confirmación y acceso desde la Sala Virtual.</td><td>Validación del dominio <code class="inline">meet.google.com</code> en <code class="inline">main.js</code> y apertura del enlace desde la sección M06.</td></tr>
+      <tr><td><strong>Correo</strong></td><td>Correo institucional publicado en contacto y pie de página.</td><td>Enlace <code class="inline">mailto:</code> generado desde <code class="inline">LEX.correo</code>.</td></tr>
+      <tr><td><strong>GitHub Pages</strong></td><td>Hosting estático del sitio publicado.</td><td>Despliegue directo del repositorio <code class="inline">Estudio-de-Abogados-Online</code>.</td></tr>
+    </table>
+
+    <div class="nota"><strong>Nota de mejora identificada:</strong> dado que Google Meet impide ser embebido en iframes de terceros, la conexión recomendada desde la Sala Virtual es abrir la reunión en pestaña nueva del navegador.</div>
+
+  </main>
+
+  <footer class="doc-pie">
+    <span>© 2026 LexOnline · Consultoría Jurídica y Academia Legal</span>
+    <span>
+      <a href="documento-procesos.html">← Ver Documento de Procesos</a> &nbsp;|&nbsp;
+      <a href="https://jdiazp67.github.io/Estudio-de-Abogados-Online/" target="_blank" rel="noopener">Volver a la web ↗</a>
+    </span>
+  </footer>
+
+</div>
+</body>
+</html>
