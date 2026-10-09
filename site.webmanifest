@@ -1,0 +1,9 @@
+{
+  "name": "V&V Consultores",
+  "short_name": "V&V",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B2A5B",
+  "theme_color": "#0B2A5B",
+  "icons": []
+}
