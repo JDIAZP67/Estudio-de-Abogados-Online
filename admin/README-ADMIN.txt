@@ -1,31 +1,29 @@
 PANEL DE MANTENIMIENTO - V&V CONSULTORES
 =========================================
 
-URL LOCAL (desarrollo):
-  http://localhost:3001/admin/login.html
+URL ONLINE (GitHub Pages + dominio):
+  https://v-v-consultores.com/admin/
+  o https://jdiazp67.github.io/Estudio-de-Abogados-Online/admin/
 
 PRIMER INGRESO:
   1. Abrir /admin/login.html
   2. Crear clave única (mínimo 4 caracteres)
-  3. Entrará automáticamente al panel
+  3. Al GUARDAR por primera vez pedirá un GitHub PAT fine-grained
+     (Solo necesita permiso: Contents → Write)
 
-LOGIN POSTERIOR:
-  1. Ingresar con la clave creada
-  2. Acceso al panel con todas las secciones
+CREAR PAT FINE-GRAINED (recomendado):
+  https://github.com/settings/tokens?type=beta
+  - Repositorio: solo Estudio-de-Abogados-Online
+  - Permisos: Repository permissions → Contents → Write
+  - Duración sugerida: 90 días o No expiration (con cuidado)
 
-SECCIONES DISPONIBLES:
-  - Configuración: Marca, contacto, SEO, Hero, mostrar evento destacado, cambio de clave
-  - Servicios: Agregar/Eliminar
-  - Abogados: Agregar/Eliminar (foto, bio, orden)
-  - Cursos: Agregar/Eliminar (portada, docente, precio)
-  - Eventos: Agregar/Eliminar (Foto principal + Destacado - solo 1)
-  - Galería: Subir/Eliminar imágenes (a uploads/galeria/)
-  - Documentos: Subir/Eliminar PDFs/DOCX (a uploads/documentos/)
-  - Testimonios: Agregar/Eliminar
-  - Ayuda
+FUNCIONAMIENTO:
+  - Login: clave única (local/sessionStorage)
+  - Escritura: GitHub Contents API → crea commits automáticos en main
+  - Fotos/PDFs: subidos a /uploads/ (se guarda como Base64 + commit)
+  - Todo queda versionado en GitHub
 
-NOTAS IMPORTANTES:
+NOTAS:
   - Diseño NUNCA se modifica (index.html, css/estilos.css intactos)
-  - Todo se guarda en /data/*.json y /uploads/
-  - Foto principal de evento: marcar Destacado. Activar "Mostrar en Hero" en Configuración
-  - Al guardar se persisten los cambios en los archivos JSON
+  - El token se guarda solo en sessionStorage (se borra al cerrar pestaña)
+  - Foto principal evento: Destacado + "Mostrar en Hero" en Configuración
