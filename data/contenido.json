@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "actualizado": "2026-10-09T11:10:42.978Z",
+  "config": {
+    "marca": {
+      "nombreVisible": "LexOnline",
+      "dominio": "jdiazp67.github.io/Estudio-de-Abogados-Online",
+      "logo": "img/logo.jpg",
+      "favicon": "img/logo.jpg",
+      "ogImage": "img/flyer.jpg"
+    },
+    "contacto": {
+      "whatsapp": "51908644688",
+      "correo": "juliodiaz1167@gmail.com",
+      "telefono": "+51 908 644 688",
+      "direccion": "Lima, Perú"
+    },
+    "redes": {
+      "facebook": "",
+      "linkedin": "",
+      "instagram": ""
+    },
+    "seo": {
+      "descripcion": "Consultoría jurídica y academia legal 100% online.",
+      "keywords": "consultoría jurídica, abogados online, cursos de derecho, academia legal, Google Meet, asesoría legal, LexOnline"
+    },
+    "hero": {
+      "titulo": "Consulta, aprende y resuelve con un equipo de abogados",
+      "subtitulo": "Consultoría Jurídica · Academia Legal",
+      "cta1Texto": "Agendar consulta",
+      "cta2Texto": "Ver cursos",
+      "mostrarEventoDestacado": false
+    },
+    "colores": {
+      "primario": "#0B2A5B",
+      "secundario": "#C9A227"
+    },
+    "secciones": {
+      "inicio": true,
+      "servicios": true,
+      "staff": true,
+      "cursos": true,
+      "eventos": false,
+      "galeria": false,
+      "documentos": false,
+      "contacto": true,
+      "pagos": true
+    }
+  },
+  "servicios": [],
+  "staff": [],
+  "cursos": [],
+  "eventos": [],
+  "galeria": [],
+  "documentos": [],
+  "testimonios": [],
+  "pagos": {
+    "yape": true,
+    "plin": true,
+    "transferencia": true,
+    "enlacesOnline": []
+  }
+}

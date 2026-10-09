@@ -1,0 +1,16 @@
+.cfg-btn{width:40px;height:40px;border-radius:999px;background:var(--blanco);border:1px solid var(--borde);cursor:pointer;font-size:17px;display:inline-flex;align-items:center;justify-content:center;line-height:1}
+.cfg-btn:hover{border-color:var(--dorado)}
+.cfg-modal .modal-contenido{max-width:960px;max-height:88vh;overflow-y:auto}
+#modal-config{z-index:400}
+.cfg-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.cfg-tabs button{padding:8px 12px;border-radius:999px;border:1px solid var(--borde);background:transparent;color:var(--texto-suave);font-size:13px;cursor:pointer}
+.cfg-tabs button.activo{background:var(--dorado);color:var(--marino);border-color:var(--dorado);font-weight:700}
+.cfg-card{background:var(--blanco);border:1px solid var(--borde);border-radius:14px;padding:18px;box-shadow:var(--sombra);margin-bottom:14px}
+.cfg-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.cfg-field{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--texto-suave)}
+.cfg-field input,.cfg-field textarea,.cfg-field select{padding:9px 10px;border-radius:10px;border:1px solid var(--borde);background:var(--blanco);color:var(--texto);font-size:14px}
+.cfg-item{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;border:1px solid var(--borde);border-radius:12px;padding:12px;margin-bottom:10px}
+.cfg-foto{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--dorado);display:block;margin:0 auto}
+.cfg-msg{font-size:13px;color:var(--texto-suave);min-height:18px}
+.cfg-err{color:#B91C1C}.cfg-ok{color:var(--verde-oscuro)}
+@media (max-width:640px){.cfg-grid{grid-template-columns:1fr}}
