@@ -3,12 +3,11 @@
   var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
   var ESTADO={data:null,auth:null,logueado:false,sucio:false,pestana:'login'};
   function cargarCSS(){ if($('#cfg-css')) return; var l=document.createElement('link'); l.id='cfg-css'; l.rel='stylesheet'; l.href='css/config-admin.css'; document.head.appendChild(l); }
-  function slug(s){return (s||'').toLowerCase().trim().replace(/[^\w\s-]/g,'').replace(/\s+/g,'-');}
   function inyectarBoton(){
     if($('#btn-config')) return;
     var nav=$('#nav-principal'); var btn=document.createElement('button');
     btn.id='btn-config'; btn.className='cfg-btn'; btn.type='button'; btn.title='Configuración'; btn.setAttribute('aria-label','Configuración'); btn.textContent='⚙️';
-    if(nav){ nav.appendChild(btn); }
+    if(nav){ nav.appendChild(btn); } else { document.body.appendChild(btn); }
     btn.addEventListener('click',abrir);
   }
   function inyectarModal(){
@@ -47,15 +46,12 @@
   }
   async function login(){ var k=$('#cfg-clave').value.trim(); var m=$('#cfg-msg'); if(!ESTADO.auth||!ESTADO.auth.hash){ m.textContent='Crear clave primero'; return; } var h=await sha256Hex(ESTADO.auth.salt+k); if(h===ESTADO.auth.hash){ sessionStorage.setItem('lex_admin_exp',String(Date.now()+8*3600*1000)); ESTADO.logueado=true; renderCuerpo(); } else { m.textContent='Clave incorrecta'; m.className='cfg-msg cfg-err'; }
   }
-  document.addEventListener('DOMContentLoaded',async function(){
+  function init(){
     cargarCSS(); inyectarBoton(); inyectarModal();
     var pend=['js/github-api.js','js/media-utils.js'].map(function(src){ return new Promise(function(r){ var s=document.createElement('script'); s.src=src; s.async=false; s.onload=s.onerror=r; document.body.appendChild(s); }); });
-    await Promise.all(pend);
-    await cargarAuth(); await cargarContenido();
-    if(parseInt(sessionStorage.getItem('lex_admin_exp')||'0')>Date.now()){ ESTADO.logueado=true; }
-    renderCuerpo(); parchearStaff();
-    window.addEventListener('lex:ready',function(){ parchearStaff(); });
-  });
+    Promise.all(pend).then(async function(){ await cargarAuth(); await cargarContenido(); if(parseInt(sessionStorage.getItem('lex_admin_exp')||'0')>Date.now()){ ESTADO.logueado=true; } renderCuerpo(); parchearStaff(); window.addEventListener('lex:ready',function(){ parchearStaff(); }); });
+  }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',init); } else { init(); }
   function parchearStaff(){
     try{ var grid=$('#staff-grid'); if(!grid||!ESTADO.data||!ESTADO.data.staff) return;
       $$('#staff-grid .miembro').forEach(function(el,i){

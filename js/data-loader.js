@@ -16,5 +16,6 @@
       sessionStorage.removeItem(KEYR); aplicar(data); window.dispatchEvent(new CustomEvent('lex:ready',{detail:data}));
     }catch(e){}
   }).catch(function(){});
-  window.addEventListener('DOMContentLoaded',function(){ var s=document.createElement('script'); s.src='js/config-admin.js'; s.async=false; document.body.appendChild(s); });
+  function inject(){ var s=document.createElement('script'); s.src='js/config-admin.js'; s.async=false; document.body.appendChild(s); }
+  if(document.readyState==='loading'){ window.addEventListener('DOMContentLoaded',inject); } else { inject(); }
 })();
