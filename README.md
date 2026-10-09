@@ -1,45 +1,57 @@
-# V&V Consultores
+# LexOnline — Consultora Legal y Cursos
 
-Sitio web corporativo para estudio jurídico V&V Consultores (`https://v-v-consultores.com/`). Página estática (HTML, CSS y JavaScript vanilla), preparada para GitHub Pages y con capa de contenido en JSON + panel de administración con clave de acceso.
+Sitio web estático del estudio jurídico virtual **LexOnline** (proyecto de Verval SAC): consultoría jurídica por videollamada con abogados colegiados y academia legal con cursos certificables.
 
-## Estructura
+## Cómo ver el sitio
 
-```text
-/
-├── index.html
-├── css/estilos.css
-├── js/
-│   ├── datos.js
-│   ├── main.js
-│   ├── data-loader.js
-│   ├── render.js
-│   └── schema.js
-├── data/                # Contenido editable (JSON)
-├── uploads/             # Archivos multimedia (fotos, PDFs)
-├── admin/               # Panel de mantenimiento (protegido)
-├── docs/                # Documentación técnica
-├── img/                 # Imágenes de marca
-└── referencias-imagenes/ # Material de referencia (no versionado pesado)
-```
+Opción 1 — abrir directamente `index.html` en el navegador (no requiere servidor).
 
-## Desarrollo local
+Opción 2 — servidor local:
 
 ```bash
-cd "/home/juliodiazprado/Documentos/ANALISIS Y DISENO EN SISTEMAS - DESARROLLO/CONSULTORIA-LEGAL-DIGITAL/Estudio-de-Abogados-Online"
-python3 -m http.server 8000
-# Abrir http://localhost:8000
+python3 -m http.server 8080
+# luego abrir http://localhost:8080
 ```
 
-## Contenido y mantenimiento
+## Estructura del proyecto
 
-Todo el contenido se gestiona desde `/admin/` con clave de acceso para el encargado. La foto principal de eventos se controla desde Eventos (`destacado`) y puede mostrarse en Hero desde Configuración.
+```
+index.html              Página principal (SPA estática)
+css/estilos.css         Estilos del sitio
+js/datos.js             Modelo de datos: catálogo completo (LEX)
+js/main.js              Render dinámico + interacción
+img/                    Logo y flyer
+docs/                   Documentación técnica del proyecto
+```
 
-## Despliegue
+## Documentación técnica
 
-GitHub Pages. Dominio: `v-v-consultores.com` (CNAME). Cada cambio publicado genera un commit automático desde el panel de administración.
+| Documento | Contenido |
+|---|---|
+| `docs/documento-canvas.html` | DC-01 · Modelo de Negocio Canvas (9 bloques de Osterwalder) |
+| `docs/documento-procesos.html` | DP-01 · Mapa de procesos, fichas P01–P07 e indicadores |
+| `docs/documento-funcional.html` | DF-01 · Modelo de datos vigente y guía operativa |
 
-## Notas
+## Gestión de contenido
 
-- Las imágenes se comprimen a WebP/JPEG antes de subirse.
-- Mientras no supere 50–100 MB/mes de media, se mantiene en `/uploads/` dentro del repo.
-- El video pesado no se versiona (ver `.gitignore`).
+Todo el catálogo se administra desde un solo archivo: `js/datos.js`.
+
+- **Abogados**: definidos una vez con `id`; especialidades y cursos los referencian (`abogadosIds`, `docenteId`).
+- **Especialidades y cursos**: precios, duraciones, descripciones.
+- **Pagos**: fase actual Yape/Plin/transferencia coordinada por WhatsApp; fase 2 con enlaces de pasarela en `LEX.pagos.enlacesOnline`.
+
+El sitio incluye un validador automático (`LEX.validarLex()`): si hay ids duplicados, referencias rotas o precios inválidos, lo advierte en la consola del navegador sin romper la página.
+
+## Tecnologías
+
+HTML5 · CSS3 · JavaScript vanilla (sin frameworks ni dependencias) · Cal.com para agendamiento · Google Meet para videollamadas · WhatsApp como canal transaccional.
+
+## Roadmap de pagos
+
+1. **Fase 1 (activa)**: pago manual coordinado por WhatsApp tras confirmar cita o inscripción.
+2. **Fase 2 (preparada)**: enlaces de pago de pasarela (Mercado Pago / Culqi / Izipay) registrados en `datos.js`.
+3. **Fase 3 (futura)**: backend con persistencia de citas, alumnos y transacciones.
+
+---
+
+© 2026 Verval SAC — LexOnline. Proyecto académico/de desarrollo interno.

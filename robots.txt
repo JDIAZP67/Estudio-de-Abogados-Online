@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://v-v-consultores.com/sitemap.xml

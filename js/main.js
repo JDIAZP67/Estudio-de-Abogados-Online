@@ -2,13 +2,25 @@
   const $ = (sel) => document.querySelector(sel);
   const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
+  const problemasDatos =
+    typeof LEX.validarLex === "function" ? LEX.validarLex() : [];
+  if (problemasDatos.length) {
+    console.warn("LexOnline · revisar js/datos.js:", problemasDatos);
+  }
+
+  const mapaAbogados = Object.fromEntries(
+    LEX.abogados.map((a) => [a.id, a])
+  );
+  const nombreAbogado = (id) =>
+    mapaAbogados[id] ? mapaAbogados[id].nombre : id;
+
   const tarjetaEspecialidad = (e) => `
     <article class="card">
       <span class="chip">Consultoría · ${e.duracion}</span>
       <div class="icono">⚖️</div>
       <h3>${e.nombre}</h3>
       <p class="meta">${e.descripcion}</p>
-      <p class="abogados"><strong>Abogados:</strong> ${e.abogados.join(", ")}</p>
+      <p class="abogados"><strong>Abogados:</strong> ${e.abogadosIds.map(nombreAbogado).join(", ")}</p>
       <p class="precio">S/ ${e.precio} <small>por sesión</small></p>
       <button class="btn btn-azul" data-cal-link="${LEX.calendario}" data-cal-config='{"layout":"month_view"}'>Agendar cita</button>
     </article>`;
@@ -19,7 +31,7 @@
       <div class="icono">🎓</div>
       <h3>${c.nombre}</h3>
       <p class="meta">${c.descripcion}</p>
-      <p class="meta"><strong>Docente:</strong> ${c.docente}</p>
+      <p class="meta"><strong>Docente:</strong> ${nombreAbogado(c.docenteId)}</p>
       <p class="precio">S/ ${c.precio} <small>· incluye certificado</small></p>
       <button class="btn btn-oro" data-cal-link="${LEX.calendarioClases}" data-cal-config='{"layout":"month_view"}'>Reservar mi clase</button>
     </article>`;
@@ -52,78 +64,9 @@
     $("#texto-correo").href = "mailto:" + LEX.correo;
   };
 
-  const abrirModal = (id) => {
-    $("#modal-" + id).classList.add("abierto");
-    document.body.style.overflow = "hidden";
-  };
-
   const cerrarModal = (id) => {
     $("#modal-" + id).classList.remove("abierto");
     document.body.style.overflow = "";
-  };
-
-  window.abrirModalConsulta = (id) => {
-    const e = LEX.especialidades.find((x) => x.id === id);
-    const abogadoSel = $("#modal-consulta .select-abogado");
-    abogadoSel.innerHTML = e.abogados.map((a) => `<option>${a}</option>`).join("");
-    $("#modal-consulta .txt-especialidad").textContent = e.nombre;
-    $("#modal-consulta .txt-precio").textContent = `S/ ${e.precio} · ${e.duracion}`;
-    $("#modal-consulta").dataset.especialidad = e.nombre;
-    $("#modal-consulta").dataset.precio = e.precio;
-    $("#modal-consulta").dataset.duracion = e.duracion;
-    $("#modal-consulta").dataset.precioTexto = `S/ ${e.precio}`;
-    abrirModal("consulta");
-  };
-
-  window.abrirModalCurso = (id) => {
-    const c = LEX.cursos.find((x) => x.id === id);
-    $("#modal-curso .txt-curso").textContent = c.nombre;
-    $("#modal-curso").dataset.curso = c.nombre;
-    $("#modal-curso").dataset.modalidad = c.modalidad;
-    $("#modal-curso").dataset.precioTexto = `S/ ${c.precio}`;
-    abrirModal("curso");
-  };
-
-  const leerValor = (selector) => $("#modal-consulta " + selector).value.trim();
-
-  window.enviarConsulta = () => {
-    const m = $("#modal-consulta");
-    const nombre = leerValor(".input-nombre");
-    const whatsapp = leerValor(".input-whatsapp");
-    const fecha = leerValor(".input-fecha");
-    const hora = leerValor(".input-hora");
-    const abogado = leerValor(".select-abogado");
-    const especialidad = m.dataset.especialidad;
-    const precio = m.dataset.precioTexto;
-    if (!nombre || !fecha || !hora) {
-      alert("Completa tu nombre, fecha y hora de la cita.");
-      return;
-    }
-    const msg =
-      `Hola V&V Consultores, quiero agendar una consulta de ${especialidad} (${precio}) ` +
-      `con ${abogado} el ${fecha} a las ${hora}. Me llamo ${nombre}.` +
-      (whatsapp ? ` Mi WhatsApp es ${whatsapp}.` : "");
-    window.open("https://wa.me/" + LEX.whatsapp + "?text=" + encodeURIComponent(msg), "_blank");
-  };
-
-  window.enviarCurso = () => {
-    const m = $("#modal-curso");
-    const nombre = $("#modal-curso .input-nombre").value.trim();
-    const correo = $("#modal-curso .input-correo").value.trim();
-    const whatsapp = $("#modal-curso .input-whatsapp").value.trim();
-    const curso = m.dataset.curso;
-    const modalidad = m.dataset.modalidad;
-    const precio = m.dataset.precioTexto;
-    if (!nombre) {
-      alert("Completa tu nombre.");
-      return;
-    }
-    const msg =
-      `Hola V&V Consultores, quiero inscribirme en "${curso}" (${precio}, ${modalidad}).` +
-      ` Me llamo ${nombre}.` +
-      (correo ? ` Mi correo es ${correo}.` : "") +
-      (whatsapp ? ` Mi WhatsApp es ${whatsapp}.` : "");
-    window.open("https://wa.me/" + LEX.whatsapp + "?text=" + encodeURIComponent(msg), "_blank");
   };
 
   window.enviarContacto = () => {
@@ -135,10 +78,31 @@
       return;
     }
     const msg =
-      `Hola V&V Consultores, soy ${nombre}` +
+      `Hola LexOnline, soy ${nombre}` +
       (correo ? ` (${correo})` : "") +
       `. ${mensaje}`;
     window.open("https://wa.me/" + LEX.whatsapp + "?text=" + encodeURIComponent(msg), "_blank");
+  };
+
+  window.pedirDatosPago = () => {
+    const msg =
+      "Hola LexOnline, quisiera recibir los datos de pago " +
+      "(Yape, Plin o transferencia bancaria) para mi consulta o curso.";
+    window.open("https://wa.me/" + LEX.whatsapp + "?text=" + encodeURIComponent(msg), "_blank");
+  };
+
+  const renderEnlacesPago = () => {
+    const cont = $("#enlaces-pagos");
+    if (!cont) return;
+    const enlaces = (LEX.pagos && LEX.pagos.enlacesOnline) || [];
+    if (!enlaces.length) return;
+    cont.innerHTML = enlaces
+      .map((e) =>
+        `<a class="btn btn-azul btn-enlace-pago" href="${e.url}" target="_blank" rel="noopener">💳 Pagar: ${e.nombre}</a>`
+      )
+      .join("");
+    const badge = $("#badge-online");
+    if (badge) badge.textContent = "💳 Pago online directo disponible";
   };
 
   const sala = (nombre) => {
@@ -189,4 +153,5 @@
   );
 
   render();
+  renderEnlacesPago();
 })();
