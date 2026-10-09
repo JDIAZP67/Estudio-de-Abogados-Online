@@ -100,7 +100,7 @@
       return;
     }
     const msg =
-      `Hola LexOnline, quiero agendar una consulta de ${especialidad} (${precio}) ` +
+      `Hola V&V Consultores, quiero agendar una consulta de ${especialidad} (${precio}) ` +
       `con ${abogado} el ${fecha} a las ${hora}. Me llamo ${nombre}.` +
       (whatsapp ? ` Mi WhatsApp es ${whatsapp}.` : "");
     window.open("https://wa.me/" + LEX.whatsapp + "?text=" + encodeURIComponent(msg), "_blank");
@@ -119,7 +119,7 @@
       return;
     }
     const msg =
-      `Hola LexOnline, quiero inscribirme en "${curso}" (${precio}, ${modalidad}).` +
+      `Hola V&V Consultores, quiero inscribirme en "${curso}" (${precio}, ${modalidad}).` +
       ` Me llamo ${nombre}.` +
       (correo ? ` Mi correo es ${correo}.` : "") +
       (whatsapp ? ` Mi WhatsApp es ${whatsapp}.` : "");
@@ -135,7 +135,7 @@
       return;
     }
     const msg =
-      `Hola LexOnline, soy ${nombre}` +
+      `Hola V&V Consultores, soy ${nombre}` +
       (correo ? ` (${correo})` : "") +
       `. ${mensaje}`;
     window.open("https://wa.me/" + LEX.whatsapp + "?text=" + encodeURIComponent(msg), "_blank");
